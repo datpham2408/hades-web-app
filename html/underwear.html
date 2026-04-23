@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top</title>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/cart.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <!-- Nhóm trái (logo + menu) -->
+        <div class="nav-group">
+          <div class="nav-logo">
+            <a href="index.html" aria-label="Về trang chủ">
+              <img
+                src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
+                alt="logo"
+              />
+            </a>
+          </div>
+
+          <ul class="nav-menu">
+            <li><a href="index.html#product-list">SHOP ALL</a></li>
+            <li><a href="tops.html#product-list">TOPS</a></li>
+            <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+            <li><a href="outerwear.html#product-list">OUTERWEARS</a></li>
+            <li><a href="underwear.html#product-list">UNDERWEARS</a></li>
+            <li><a href="bags.html#product-list">BAGS</a></li>
+            <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+            <li><a href="sale.html#product-list">SALE</a></li>
+            <li><a href="recruitment.html">RECRUITMENT</a></li>
+            <li><a href="project-info.html">TH&Ocirc;NG TIN</a></li>
+          </ul>
+        </div>
+
+        <!-- Nhóm phải -->
+        <div class="nav-actions">
+          <a href="auth.html" class="nav-login">ĐĂNG NHẬP</a>
+
+          <span class="nav-search">TÌM KIẾM</span>
+
+          <span class="nav-cart" onclick="openCart(event)">
+            GIỎ HÀNG (<span id="cart-count">0</span>)
+          </span>
+
+          <select class="nav-lang">
+            <option>VI</option>
+            <option>EN</option>
+          </select>
+        </div>
+
+        <!-- TOP -->
+        <div class="mobile-top">
+          <a href="index.html" aria-label="Về trang chủ">
+            <img
+              src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
+              alt="logo"
+            />
+          </a>
+          <img
+            src="https://file.hstatic.net/1000306633/file/frame_6694338c38af43ed949ac588da62aa56.svg"
+          />
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="mobile-bottom">
+          <i class="bx bx-menu menu-open"></i>
+
+          <div class="mobile-icons">
+            <i class="bx bx-search mobile-search-trigger"></i>
+            <i
+              class="bx bx-cart mobile-cart-trigger"
+              onclick="openCart(event)"
+            ></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="overlay"></div>
+
+    <div class="mobile-menu">
+      <i class="bx bx-x menu-close"></i>
+
+      <ul>
+        <li><a href="index.html#product-list">SHOP ALL</a></li>
+        <li><a href="tops.html#product-list">TOPS</a></li>
+        <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+        <li><a href="outerwear.html#product-list">OUTERWEARS</a></li>
+        <li><a href="underwear.html#product-list">UNDERWEARS</a></li>
+        <li><a href="bags.html#product-list">BAGS</a></li>
+        <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+        <li><a href="sale.html#product-list">SALE</a></li>
+        <li><a href="recruitment.html">RECRUITMENT</a></li>
+            <li><a href="project-info.html">TH&Ocirc;NG TIN</a></li>
+      </ul>
+    </div>
+
+    <!-- =========== HERO ============== -->
+    <section class="hero">
+      <img
+        src="https://theme.hstatic.net/1000306633/1001194548/14/slideshow_3.jpg?v=506"
+        alt="banner"
+      />
+    </section>
+
+    <!-- ================ marquee =============== -->
+    <section class="marquee">
+      <div class="marquee-track">
+        <!-- group 1 -->
+        <div class="marquee-group">
+          <span>NEW ARRIVALS</span>
+          <span>NEW ARRIVALS</span>
+          <span>NEW ARRIVALS</span>
+          <span>NEW ARRIVALS</span>
+        </div>
+
+        <!-- group 2 -->
+        <div class="marquee-group">
+          <span>NEW ARRIVALS</span>
+          <span>NEW ARRIVALS</span>
+          <span>NEW ARRIVALS</span>
+          <span>NEW ARRIVALS</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="product-filter">
+      <select id="sort">
+        <option value="new">MỚI NHẤT</option>
+        <option value="featured">SẢN PHẨM NỔI BẬT</option>
+        <option value="price-asc">GIÁ: TĂNG DẦN</option>
+        <option value="price-desc">GIÁ: GIẢM DẦN</option>
+        <option value="old">CŨ NHẤT</option>
+        <option value="best">BÁN CHẠY NHẤT</option>
+      </select>
+    </div>
+
+    <!-- ================== Product card ================= -->
+    <section class="product-grid" id="product-list"></section>
+
+    <div class="footer-marquee">
+      <div class="footer-marquee-track">
+        <div class="marquee-group">
+          <span>STREETWEAR BRAND LIMITED</span>
+          <span>STREETWEAR BRAND LIMITED</span>
+          <span>STREETWEAR BRAND LIMITED</span>
+          <span>STREETWEAR BRAND LIMITED</span>
+        </div>
+
+        <div class="marquee-group">
+          <span>STREETWEAR BRAND LIMITED</span>
+          <span>STREETWEAR BRAND LIMITED</span>
+          <span>STREETWEAR BRAND LIMITED</span>
+          <span>STREETWEAR BRAND LIMITED</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= Footer =========================== -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h2 class="footer-logo">HADES</h2>
+          <p class="footer-desc">
+            Streetwear brand mang phong c&aacute;ch hi&#7879;n &#273;&#7841;i, c&aacute; t&iacute;nh v&agrave; &#273;&#7853;m ch&#7845;t ri&ecirc;ng.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>SHOP</h3>
+          <ul>
+            <li><a href="tops.html#product-list">TOPS</a></li>
+            <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+            <li><a href="outerwear.html#product-list">OUTERWEAR</a></li>
+            <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>SUPPORT</h3>
+          <ul>
+            <li><a href="auth.html">ACCOUNT</a></li>
+            <li><a href="checkout.html">CHECKOUT</a></li>
+            <li><a href="recruitment.html">CAREERS</a></li>
+            <li><a href="project-info.html">PROJECT INFO</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>FOLLOW US</h3>
+          <div class="footer-social">
+            <i class="bx bxl-facebook"></i>
+            <i class="bx bxl-instagram"></i>
+            <i class="bx bxl-tiktok"></i>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HADES STUDIO. ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+    <div class="search-overlay" id="searchOverlay"></div>
+    <div class="search-drawer" id="searchDrawer">
+      <div class="search-header">
+        <h3 class="search-title">TÌM KIẾM</h3>
+        <span class="close" onclick="closeSearch()">x</span>
+      </div>
+
+      <div class="search-body">
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Tìm theo tên sản phẩm"
+        />
+
+        <div class="search-results"></div>
+      </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-header">
+        <select class="cart-lang">
+          <option>EN</option>
+        </select>
+
+        <span class="close" onclick="closeCart()">x</span>
+      </div>
+
+      <h3 class="cart-title">Giỏ Hàng</h3>
+
+      <div class="cart-body"></div>
+
+      <div class="cart-nav">
+        <span><</span>
+        <span>></span>
+      </div>
+
+      <hr class="cart-line" />
+
+      <div class="cart-total">
+        <span>TOTAL</span>
+        <span>0 ₫</span>
+      </div>
+
+      <div class="cart-actions">
+        <button type="button">XEM GIỎ HÀNG</button>
+        <button type="button">THANH TOÁN</button>
+      </div>
+    </div>
+    <script src="../js/product.js"></script>
+    <script src="../js/app-core.js"></script>
+    <script src="../js/app-render.js"></script>
+    <script src="../js/app-search.js"></script>
+    <script src="../js/app-catalog.js"></script>
+    <script src="../js/app-cart.js"></script>
+    <script src="../js/app-auth.js"></script>
+    <script src="../js/app-ui.js"></script>
+    <script>
+      initProductPage("underwear");
+    </script>
+  </body>
+</html>
+
+
+
+
+

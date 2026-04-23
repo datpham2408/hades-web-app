@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh toán</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/checkout.css" />
+  </head>
+  <body class="checkout-page">
+    <header class="checkout-header">
+      <a class="checkout-logo" href="index.html">HADES</a>
+      <a class="checkout-back" href="index.html">Tiếp tục mua sắm</a>
+    </header>
+
+    <main class="checkout-layout">
+      <section class="checkout-form-panel">
+        <div class="checkout-section">
+          <h1 class="checkout-page-title">Thông tin giao hàng</h1>
+
+          <form id="checkoutForm" class="checkout-form" novalidate>
+            <div class="checkout-field">
+              <label for="fullName">Họ và tên</label>
+              <input id="fullName" name="fullName" type="text" />
+            </div>
+
+            <div class="checkout-field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" />
+            </div>
+
+            <div class="checkout-field">
+              <label for="phone">Số điện thoại</label>
+              <input id="phone" name="phone" type="tel" />
+            </div>
+
+            <div class="checkout-field">
+              <label for="address">Địa chỉ</label>
+              <input id="address" name="address" type="text" />
+            </div>
+
+            <div class="checkout-grid">
+              <div class="checkout-field">
+                <label for="city">Tỉnh / thành</label>
+                <select id="city" name="city">
+                  <option value="">Chọn tỉnh / thành</option>
+                  <option>Hồ Chí Minh</option>
+                  <option>Hà Nội</option>
+                  <option>Đà Nẵng</option>
+                  <option>Cần Thơ</option>
+                </select>
+              </div>
+
+              <div class="checkout-field">
+                <label for="district">Quận / huyện</label>
+                <select id="district" name="district">
+                  <option value="">Chọn quận / huyện</option>
+                  <option>Quận 1</option>
+                  <option>Quận 3</option>
+                  <option>Quận Bình Thạnh</option>
+                  <option>Thành phố Thủ Đức</option>
+                </select>
+              </div>
+
+              <div class="checkout-field">
+                <label for="ward">Phường / xã</label>
+                <select id="ward" name="ward">
+                  <option value="">Chọn phường / xã</option>
+                  <option>Phường Bến Nghé</option>
+                  <option>Phường Võ Thị Sáu</option>
+                  <option>Phường Gia Định</option>
+                  <option>Phường An Khánh</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="checkout-section">
+          <h2 class="checkout-section-title">Phương thức vận chuyển</h2>
+          <div id="shippingPlaceholder" class="shipping-placeholder">
+            Vui lòng chọn tỉnh / thành, quận / huyện và phường / xã để hiển thị
+            phương thức vận chuyển.
+          </div>
+        </div>
+
+        <div class="checkout-section">
+          <h2 class="checkout-section-title">Phương thức thanh toán</h2>
+
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="cod" checked />
+            <span>COD (Thanh toán khi giao hàng)</span>
+          </label>
+
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="bank" />
+            <span>Chuyển khoản ngân hàng</span>
+          </label>
+        </div>
+      </section>
+
+      <aside class="checkout-summary-panel">
+        <div class="checkout-section">
+          <h2 class="checkout-section-title">Đơn hàng của bạn</h2>
+          <div id="checkoutItems" class="checkout-items"></div>
+        </div>
+
+        <div class="checkout-section">
+          <label class="discount-label" for="discountCode">Mã giảm giá</label>
+          <div class="discount-row">
+            <input
+              id="discountCode"
+              class="discount-input"
+              type="text"
+              placeholder="Nhập mã giảm giá"
+            />
+            <button id="applyDiscountBtn" class="discount-button" type="button">
+              Sử dụng
+            </button>
+          </div>
+        </div>
+
+        <div class="checkout-section">
+          <div class="summary-row">
+            <span>Tạm tính</span>
+            <span id="subtotalValue">0 ₫</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Phí vận chuyển</span>
+            <span id="shippingValue">0 ₫</span>
+          </div>
+
+          <div class="summary-row summary-row-total">
+            <span>Tổng cộng</span>
+            <span id="totalValue">0 ₫</span>
+          </div>
+        </div>
+
+        <button id="placeOrderBtn" class="place-order-button" type="button">
+          Hoàn tất đơn hàng
+        </button>
+
+        <p id="checkoutMessage" class="checkout-message"></p>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h2 class="footer-logo">HADES</h2>
+          <p class="footer-desc">
+            Streetwear brand mang phong c&aacute;ch hi&#7879;n &#273;&#7841;i, c&aacute; t&iacute;nh v&agrave; &#273;&#7853;m ch&#7845;t ri&ecirc;ng.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>SHOP</h3>
+          <ul>
+            <li><a href="tops.html#product-list">TOPS</a></li>
+            <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+            <li><a href="outerwear.html#product-list">OUTERWEAR</a></li>
+            <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>SUPPORT</h3>
+          <ul>
+            <li><a href="auth.html">ACCOUNT</a></li>
+            <li><a href="checkout.html">CHECKOUT</a></li>
+            <li><a href="recruitment.html">CAREERS</a></li>
+            <li><a href="project-info.html">PROJECT INFO</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>FOLLOW US</h3>
+          <div class="footer-social">
+            <i class="bx bxl-facebook"></i>
+            <i class="bx bxl-instagram"></i>
+            <i class="bx bxl-tiktok"></i>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HADES STUDIO. ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+
+    <script src="../js/checkout.js"></script>
+  </body>
+</html>
+
+

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/cart.css" />
+    <link rel="stylesheet" href="../css/detail.css" />
+  </head>
+  <body class="detail-page">
+    <header>
+      <nav class="navbar">
+        <div class="nav-group">
+          <div class="nav-logo">
+            <a href="index.html" aria-label="Về trang chủ">
+              <img
+                src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
+                alt="logo"
+              />
+            </a>
+          </div>
+
+          <ul class="nav-menu">
+            <li><a href="index.html#product-list">SHOP ALL</a></li>
+            <li><a href="tops.html#product-list">TOPS</a></li>
+            <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+            <li><a href="outerwear.html#product-list">OUTERWEARS</a></li>
+            <li><a href="underwear.html#product-list">UNDERWEARS</a></li>
+            <li><a href="bags.html#product-list">BAGS</a></li>
+            <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+            <li><a href="sale.html#product-list">SALE</a></li>
+            <li><a href="recruitment.html">RECRUITMENT</a></li>
+            <li><a href="project-info.html">TH&Ocirc;NG TIN</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-actions">
+          <a href="auth.html" class="nav-login">ĐĂNG NHẬP</a>
+          <span class="nav-search">TÌM KIẾM</span>
+          <span class="nav-cart" onclick="openCart(event)">
+            GIỎ HÀNG (<span id="cart-count">0</span>)
+          </span>
+          <select class="nav-lang">
+            <option>VI</option>
+            <option>EN</option>
+          </select>
+        </div>
+
+        <div class="mobile-top">
+          <a href="index.html" aria-label="Về trang chủ">
+            <img
+              src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
+              alt="logo"
+            />
+          </a>
+          <img
+            src="https://file.hstatic.net/1000306633/file/frame_6694338c38af43ed949ac588da62aa56.svg"
+            alt="wordmark"
+          />
+        </div>
+
+        <div class="mobile-bottom">
+          <i class="bx bx-menu menu-open"></i>
+
+          <div class="mobile-icons">
+            <i class="bx bx-search mobile-search-trigger"></i>
+            <i class="bx bx-cart mobile-cart-trigger" onclick="openCart(event)"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="overlay"></div>
+
+    <div class="mobile-menu">
+      <i class="bx bx-x menu-close"></i>
+
+      <ul>
+        <li><a href="index.html#product-list">SHOP ALL</a></li>
+        <li><a href="tops.html#product-list">TOPS</a></li>
+        <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+        <li><a href="outerwear.html#product-list">OUTERWEARS</a></li>
+        <li><a href="underwear.html#product-list">UNDERWEARS</a></li>
+        <li><a href="bags.html#product-list">BAGS</a></li>
+        <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+        <li><a href="sale.html#product-list">SALE</a></li>
+        <li><a href="recruitment.html">RECRUITMENT</a></li>
+            <li><a href="project-info.html">TH&Ocirc;NG TIN</a></li>
+      </ul>
+    </div>
+
+    <main class="detail-main">
+      <nav class="detail-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span>/</span>
+        <a id="detailCategoryLink" href="tops.html#product-list">Danh mục</a>
+        <span>/</span>
+        <span id="detailBreadcrumbName">Sản phẩm</span>
+      </nav>
+
+      <div class="detail-layout">
+        <section class="detail-panel detail-description">
+          <div>
+            <h2 class="detail-heading">Mô tả sản phẩm</h2>
+            <p id="detailDescription" class="detail-copy"></p>
+          </div>
+
+          <div>
+            <h2 class="detail-heading">Thông tin</h2>
+            <ul id="detailInfo" class="detail-list"></ul>
+          </div>
+
+          <p id="detailNote" class="detail-note"></p>
+        </section>
+
+        <section class="detail-gallery">
+          <div id="detailThumbs" class="detail-thumbs"></div>
+
+          <div class="detail-main-visual">
+            <img id="detailMainImage" class="detail-main-image" src="" alt="" />
+          </div>
+        </section>
+
+        <section class="detail-panel detail-purchase">
+          <div>
+            <p id="detailSku" class="detail-sku"></p>
+            <h1 id="detailName" class="detail-product-name"></h1>
+            <p id="detailPrice" class="detail-price"></p>
+          </div>
+
+          <div class="detail-color">
+            <p class="detail-color-label">Màu sắc</p>
+            <div class="detail-color-name">
+              <span class="detail-color-swatch"></span>
+              <span id="detailColorName">Black</span>
+            </div>
+          </div>
+
+          <div>
+            <p class="detail-size-label">Kích thước</p>
+            <div id="detailSizeGroup" class="detail-size-group">
+              <button class="detail-size-btn" type="button" data-size="S">S</button>
+              <button class="detail-size-btn" type="button" data-size="M">M</button>
+              <button class="detail-size-btn" type="button" data-size="L">L</button>
+            </div>
+          </div>
+
+          <div class="detail-action-group">
+            <button id="detailAddToCart" class="detail-add-btn" type="button">
+              THÊM VÀO GIỎ
+            </button>
+            <button id="detailBuyNow" class="detail-buy-btn" type="button">
+              MUA NGAY
+            </button>
+          </div>
+
+          <p id="detailFeedback" class="detail-feedback"></p>
+        </section>
+      </div>
+    </main>
+
+    <div class="search-overlay" id="searchOverlay"></div>
+    <div class="search-drawer" id="searchDrawer">
+      <div class="search-header">
+        <h3 class="search-title">TÌM KIẾM</h3>
+        <span class="close" onclick="closeSearch()">x</span>
+      </div>
+
+      <div class="search-body">
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Tìm theo tên sản phẩm"
+        />
+
+        <div class="search-results"></div>
+      </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-header">
+        <select class="cart-lang">
+          <option>EN</option>
+        </select>
+
+        <span class="close" onclick="closeCart()">x</span>
+      </div>
+
+      <h3 class="cart-title">GIỎ HÀNG</h3>
+
+      <div class="cart-body"></div>
+
+      <div class="cart-nav">
+        <span><</span>
+        <span>></span>
+      </div>
+
+      <hr class="cart-line" />
+
+      <div class="cart-total">
+        <span>TOTAL</span>
+        <span>0 ₫</span>
+      </div>
+
+      <div class="cart-actions">
+        <button type="button">XEM GIỎ HÀNG</button>
+        <button type="button">THANH TOÁN</button>
+      </div>
+    </div>
+
+    <script src="../js/product.js"></script>
+    <script src="../js/app-core.js"></script>
+    <script src="../js/app-render.js"></script>
+    <script src="../js/app-search.js"></script>
+    <script src="../js/app-catalog.js"></script>
+    <script src="../js/app-cart.js"></script>
+    <script src="../js/app-auth.js"></script>
+    <script src="../js/app-ui.js"></script>
+    <script src="../js/detail.js"></script>
+  </body>
+</html>
+
+

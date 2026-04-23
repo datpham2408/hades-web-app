@@ -1,0 +1,288 @@
+.checkout-page {
+  min-height: 100vh;
+  background: #f7f7f4;
+  color: #111;
+  font-family: "Quicksand", sans-serif;
+}
+
+.checkout-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px;
+  background: rgba(247, 247, 244, 0.96);
+  border-bottom: 1px solid #e5e5df;
+  backdrop-filter: blur(10px);
+}
+
+.checkout-logo,
+.checkout-back {
+  color: #111;
+  text-decoration: none;
+}
+
+.checkout-logo {
+  font-family: "Oswald", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.checkout-back {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
+  gap: 28px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 40px 48px;
+  align-items: start;
+}
+
+.checkout-form-panel,
+.checkout-summary-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.checkout-section {
+  background: #fff;
+  border: 1px solid #e7e7e1;
+  padding: 24px;
+}
+
+.checkout-page-title,
+.checkout-section-title {
+  margin: 0 0 18px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.checkout-page-title {
+  font-size: 28px;
+}
+
+.checkout-section-title {
+  font-size: 18px;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.checkout-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkout-field label,
+.discount-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.checkout-field input,
+.checkout-field select,
+.discount-input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #d8d8d2;
+  background: #fff;
+  padding: 0 14px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.checkout-field input:focus,
+.checkout-field select:focus,
+.discount-input:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.06);
+}
+
+.shipping-placeholder {
+  min-height: 78px;
+  border: 1px dashed #c8c8c1;
+  background: #fbfbf9;
+  color: #666;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0;
+  border-top: 1px solid #ededeb;
+  font-size: 14px;
+}
+
+.payment-option:first-of-type {
+  border-top: 0;
+}
+
+.checkout-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-empty {
+  margin: 0;
+  padding-top: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.checkout-item {
+  display: flex;
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid #ededeb;
+}
+
+.checkout-item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.checkout-item-image {
+  width: 88px;
+  height: 110px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f0f0eb;
+}
+
+.checkout-item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.checkout-item-name {
+  margin: 0;
+  font-family: "Oswald", sans-serif;
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+}
+
+.checkout-item-variant,
+.checkout-item-quantity {
+  margin: 0;
+  color: #727272;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.checkout-item-price {
+  font-family: "Oswald", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.discount-row {
+  display: flex;
+  gap: 10px;
+}
+
+.discount-button,
+.place-order-button {
+  border: 0;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.discount-button {
+  padding: 0 18px;
+  flex-shrink: 0;
+}
+
+.discount-button:hover,
+.place-order-button:hover {
+  background: #2b2b2b;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #ededeb;
+  font-size: 14px;
+}
+
+.summary-row-total {
+  border-bottom: 0;
+  padding-top: 18px;
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.place-order-button {
+  width: 100%;
+  height: 54px;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+.checkout-message {
+  min-height: 20px;
+  margin: 0;
+  font-size: 14px;
+  color: #0a7f3f;
+}
+
+.checkout-message.is-error {
+  color: #b12626;
+}
+
+@media (max-width: 960px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+    padding: 24px 20px 40px;
+  }
+
+  .checkout-header {
+    padding: 18px 20px;
+  }
+
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}

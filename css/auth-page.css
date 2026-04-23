@@ -1,0 +1,211 @@
+/* ================= Auth ================= */
+.auth-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.auth-container h2 {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.auth-container label {
+  display: block;
+  margin: 10px 0 5px;
+  font-family: var(--font-navbar);
+  font-size: 14px;
+}
+
+.auth-container select {
+  margin-top: 10px;
+}
+
+.auth-container input,
+.auth-container select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.auth-container input::placeholder {
+  color: #aaa;
+}
+
+.auth-form {
+  display: block;
+}
+
+.auth-container input.is-invalid,
+.auth-container select.is-invalid {
+  border-color: #c62828;
+  background: #fff8f8;
+}
+
+.auth-error,
+.auth-success {
+  margin-top: 6px;
+  font-family: var(--font-content);
+  font-size: 12px;
+  text-align: left;
+  cursor: default;
+}
+
+.auth-error {
+  min-height: 18px;
+  color: #c62828;
+}
+
+.auth-success {
+  min-height: 18px;
+  color: #1b5e20;
+}
+
+.auth-container button,
+.forgot-box button {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+.auth-container button {
+  margin-top: 10px;
+  padding: 12px;
+}
+
+.forgot-box button {
+  padding: 14px;
+  font-weight: bold;
+}
+
+.auth-container button::before,
+.forgot-box button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 0%;
+  height: 100%;
+  background: #000;
+}
+
+.auth-container button::before {
+  transition: 0.9s ease;
+}
+
+.forgot-box button::before {
+  transition: width 0.6s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.auth-container button:hover::before,
+.forgot-box button:hover::before {
+  width: 100%;
+}
+
+.auth-container button:hover,
+.forgot-box button:hover {
+  color: #fff;
+}
+
+.auth-container p {
+  margin-top: 15px;
+  font-family: var(--font-navbar);
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.forgot {
+  margin: 10px 0;
+  color: var(--color-text);
+  font-size: 13px;
+}
+
+.auth-header {
+  position: relative;
+  padding: 20px 40px;
+}
+
+.auth-nav {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.auth-nav a {
+  margin-left: 20px;
+  color: var(--color-text);
+  font-family: var(--font-navbar);
+  font-size: 14px;
+}
+
+.logo {
+  display: block;
+  height: 40px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.forgot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-overlay);
+}
+
+.forgot-box {
+  position: relative;
+  width: 500px;
+  max-width: 90%;
+  padding: 40px;
+  border-radius: 5px;
+  background: var(--color-surface);
+  animation: fadeIn 0.3s ease;
+}
+
+.forgot-box input {
+  width: 100%;
+  margin: 20px 0;
+  padding: 12px;
+  border: 1px solid #060606;
+  border-radius: 5px;
+}
+
+.forgot-box h2 {
+  font-family: var(--font-navbar);
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tuy&#7875;n d&#7909;ng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/cart.css" />
+  </head>
+  <body class="recruitment-page">
+    <header>
+      <nav class="navbar">
+        <div class="nav-group">
+          <div class="nav-logo">
+            <a href="index.html" aria-label="V&#7873; trang ch&#7911;">
+              <img
+                src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
+                alt="logo"
+              />
+            </a>
+          </div>
+
+          <ul class="nav-menu">
+            <li><a href="index.html#product-list">SHOP ALL</a></li>
+            <li><a href="tops.html#product-list">TOPS</a></li>
+            <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+            <li><a href="outerwear.html#product-list">OUTERWEARS</a></li>
+            <li><a href="underwear.html#product-list">UNDERWEARS</a></li>
+            <li><a href="bags.html#product-list">BAGS</a></li>
+            <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+            <li><a href="sale.html#product-list">SALE</a></li>
+            <li><a href="recruitment.html">RECRUITMENT</a></li>
+            <li><a href="project-info.html">TH&Ocirc;NG TIN</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-actions">
+          <a href="auth.html" class="nav-login">&#272;&#258;NG NH&#7852;P</a>
+          <span class="nav-search">T&#204;M KI&#7870;M</span>
+          <span class="nav-cart" onclick="openCart(event)">
+            GI&#7886; H&#192;NG (<span id="cart-count">0</span>)
+          </span>
+          <select class="nav-lang">
+            <option>VI</option>
+            <option>EN</option>
+          </select>
+        </div>
+
+        <div class="mobile-top">
+          <a href="index.html" aria-label="V&#7873; trang ch&#7911;">
+            <img
+              src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
+              alt="logo"
+            />
+          </a>
+          <img
+            src="https://file.hstatic.net/1000306633/file/frame_6694338c38af43ed949ac588da62aa56.svg"
+            alt="wordmark"
+          />
+        </div>
+
+        <div class="mobile-bottom">
+          <i class="bx bx-menu menu-open"></i>
+
+          <div class="mobile-icons">
+            <i class="bx bx-search mobile-search-trigger"></i>
+            <i class="bx bx-cart mobile-cart-trigger" onclick="openCart(event)"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="overlay"></div>
+
+    <div class="mobile-menu">
+      <i class="bx bx-x menu-close"></i>
+
+      <ul>
+        <li><a href="index.html#product-list">SHOP ALL</a></li>
+        <li><a href="tops.html#product-list">TOPS</a></li>
+        <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+        <li><a href="outerwear.html#product-list">OUTERWEARS</a></li>
+        <li><a href="underwear.html#product-list">UNDERWEARS</a></li>
+        <li><a href="bags.html#product-list">BAGS</a></li>
+        <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+        <li><a href="sale.html#product-list">SALE</a></li>
+        <li><a href="recruitment.html">RECRUITMENT</a></li>
+            <li><a href="project-info.html">TH&Ocirc;NG TIN</a></li>
+      </ul>
+    </div>
+
+    <section class="recruitment-video recruitment-hero">
+      <div
+        id="video"
+      ></div>
+
+      <div class="recruitment-hero-overlay"></div>
+
+      <div class="recruitment-hero-content">
+        <p class="recruitment-eyebrow">JOIN HADES STUDIO</p>
+        <h1>X&acirc;y d&#7921;ng nh&#7919;ng tr&#7843;i nghi&#7879;m th&#7901;i trang c&aacute; t&iacute;nh.</h1>
+        <p class="recruitment-lead">
+          Ch&uacute;ng t&ocirc;i t&igrave;m nh&#7919;ng ng&#432;&#7901;i c&oacute; gu th&#7849;m m&#7929; t&#7889;t,
+          k&#7927; lu&#7853;t trong c&aacute;ch l&agrave;m vi&#7879;c v&agrave; s&#7861;n s&agrave;ng t&#7841;o ra
+          nh&#7919;ng s&#7843;n ph&#7849;m, h&igrave;nh &#7843;nh v&agrave; tr&#7843;i nghi&#7879;m mua s&#7855;m s&#7855;c n&eacute;t.
+        </p>
+
+        <div class="recruitment-hero-actions">
+          <a href="#recruitment-jobs" class="recruitment-primary-btn">Xem v&#7883; tr&iacute;</a>
+          <a href="mailto:careers@hadesstudio.vn" class="recruitment-secondary-btn">
+            G&#7917;i CV
+          </a>
+        </div>
+      </div>
+
+      <button class="sound-btn" type="button" onclick="toggleSound()" aria-label="Tắt mở âm thanh">
+        &#128263;
+      </button>
+    </section>
+
+    <main class="recruitment-main">
+      <section class="recruitment-intro">
+        <div class="recruitment-section-head">
+          <p class="recruitment-kicker">WHY HADES</p>
+          <h2>M&#7897;t n&#417;i &#273;&#7875; b&#7841;n &#273;&#432;a &yacute; t&#432;&#7903;ng th&agrave;nh th&agrave;nh ph&#7849;m th&#7853;t.</h2>
+        </div>
+
+        <div class="recruitment-feature-grid">
+          <article class="recruitment-feature-card">
+            <span>01</span>
+            <h3>T&#7889;c &#273;&#7897; v&agrave; &#273;&#7897; t&#7853;p trung</h3>
+            <p>
+              Team &#432;u ti&ecirc;n c&aacute;ch l&agrave;m vi&#7879;c g&#7885;n, ph&#7843;n h&#7891;i tr&#7921;c ti&#7871;p
+              v&agrave; quy&#7871;t &#273;&#7883;nh nhanh &#273;&#7875; gi&#7919; &#273;&uacute;ng n&#259;ng l&#432;&#7907;ng s&aacute;ng t&#7841;o.
+            </p>
+          </article>
+
+          <article class="recruitment-feature-card">
+            <span>02</span>
+            <h3>Gu th&#7849;m m&#7929; r&otilde; n&eacute;t</h3>
+            <p>
+              M&#7895;i vai tr&ograve; &#273;&#7873;u c&#7847;n &yacute; th&#7913;c &#273;&#432;&#7907;c h&igrave;nh &#7843;nh th&#432;&#417;ng hi&#7879;u
+              v&agrave; gi&#7919; tinh th&#7847;n t&#7889;i gi&#7843;n, hi&#7879;n &#273;&#7841;i, c&oacute; c&aacute; t&iacute;nh.
+            </p>
+          </article>
+
+          <article class="recruitment-feature-card">
+            <span>03</span>
+            <h3>H&#7907;p t&aacute;c th&#7853;t s&#7921;</h3>
+            <p>
+              Ch&uacute;ng t&ocirc;i t&ocirc;n tr&#7885;ng k&#7929; n&#259;ng c&#7911;a nhau v&agrave; l&agrave;m vi&#7879;c nh&#432; m&#7897;t team nh&#7887;,
+              linh ho&#7841;t, c&oacute; tr&aacute;ch nhi&#7879;m.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="recruitment-snapshot">
+        <div class="recruitment-stat">
+          <strong>06+</strong>
+          <span>V&#7883; tr&iacute; &#273;ang m&#7903;</span>
+        </div>
+        <div class="recruitment-stat">
+          <strong>Full-time</strong>
+          <span>&#431;u ti&ecirc;n &#7913;ng vi&ecirc;n c&oacute; th&#7875; l&agrave;m vi&#7879;c on-site</span>
+        </div>
+        <div class="recruitment-stat">
+          <strong>HCM City</strong>
+          <span>M&ocirc;i tr&#432;&#7901;ng streetwear t&#7889;c &#273;&#7897; cao, &#273;&#7853;m ch&#7845;t s&aacute;ng t&#7841;o</span>
+        </div>
+      </section>
+
+      <section class="recruitment-jobs" id="recruitment-jobs">
+        <div class="recruitment-section-head">
+          <p class="recruitment-kicker">OPEN POSITIONS</p>
+          <h2>Nh&#7919;ng vai tr&ograve; ch&uacute;ng t&ocirc;i &#273;ang t&igrave;m.</h2>
+        </div>
+
+        <div class="recruitment-job-list">
+          <article class="recruitment-job-card">
+            <div>
+              <p class="recruitment-job-meta">Brand Team / Full-time</p>
+              <h3>Content Creative</h3>
+              <p>
+                Ph&aacute;t tri&#7875;n concept, caption v&agrave; n&#7897;i dung campaign cho social
+                media v&agrave; c&aacute;c &#273;&#7907;t ra m&#7855;t b&#7897; s&#432;u t&#7853;p.
+              </p>
+            </div>
+            <a href="mailto:careers@hadesstudio.vn?subject=Ung%20tuyen%20Content%20Creative">
+              &#7912;ng tuy&#7875;n
+            </a>
+          </article>
+
+          <article class="recruitment-job-card">
+            <div>
+              <p class="recruitment-job-meta">E-commerce / Full-time</p>
+              <h3>Website & E-commerce Executive</h3>
+              <p>
+                Qu&#7843;n l&yacute; n&#7897;i dung website, c&#7853;p nh&#7853;t landing page v&agrave; t&#7889;i &#432;u tr&#7843;i
+                nghi&#7879;m mua h&agrave;ng tr&ecirc;n c&aacute;c k&ecirc;nh online.
+              </p>
+            </div>
+            <a href="mailto:careers@hadesstudio.vn?subject=Ung%20tuyen%20Website%20Executive">
+              &#7912;ng tuy&#7875;n
+            </a>
+          </article>
+
+          <article class="recruitment-job-card">
+            <div>
+              <p class="recruitment-job-meta">Studio / Full-time</p>
+              <h3>Photographer / Videographer</h3>
+              <p>
+                Ch&#7883;u tr&aacute;ch nhi&#7879;m h&igrave;nh &#7843;nh lookbook, campaign, short-form video
+                v&agrave; nh&#7853;n di&#7879;n th&#7883; gi&aacute;c cho th&#432;&#417;ng hi&#7879;u.
+              </p>
+            </div>
+            <a href="mailto:careers@hadesstudio.vn?subject=Ung%20tuyen%20Photographer">
+              &#7912;ng tuy&#7875;n
+            </a>
+          </article>
+
+          <article class="recruitment-job-card">
+            <div>
+              <p class="recruitment-job-meta">Retail / Full-time</p>
+              <h3>Store Stylist</h3>
+              <p>
+                T&#432; v&#7845;n outfit, ch&#259;m s&oacute;c tr&#7843;i nghi&#7879;m kh&aacute;ch h&agrave;ng v&agrave; gi&#7919; tinh th&#7847;n
+                HADES nh&#7845;t qu&aacute;n t&#7841;i c&#7917;a h&agrave;ng.
+              </p>
+            </div>
+            <a href="mailto:careers@hadesstudio.vn?subject=Ung%20tuyen%20Store%20Stylist">
+              &#7912;ng tuy&#7875;n
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="recruitment-process">
+        <div class="recruitment-section-head">
+          <p class="recruitment-kicker">PROCESS</p>
+          <h2>Quy tr&igrave;nh &#7913;ng tuy&#7875;n ng&#7855;n g&#7885;n v&agrave; r&otilde; r&agrave;ng.</h2>
+        </div>
+
+        <div class="recruitment-process-grid">
+          <article>
+            <span>01</span>
+            <h3>N&#7897;p h&#7891; s&#417;</h3>
+            <p>G&#7917;i CV, portfolio v&agrave; v&#7883; tr&iacute; &#7913;ng tuy&#7875;n qua email c&#7911;a team.</p>
+          </article>
+
+          <article>
+            <span>02</span>
+            <h3>S&agrave;ng l&#7885;c</h3>
+            <p>Team &#273;&aacute;nh gi&aacute; theo kinh nghi&#7879;m, gu th&#7849;m m&#7929; v&agrave; m&#7913;c &#273;&#7897; ph&ugrave; h&#7907;p.</p>
+          </article>
+
+          <article>
+            <span>03</span>
+            <h3>Ph&#7887;ng v&#7845;n</h3>
+            <p>
+              Trao &#273;&#7893;i tr&#7921;c ti&#7871;p v&#7873; c&aacute;ch l&agrave;m vi&#7879;c, k&#7929; n&#259;ng v&agrave; k&#7923; v&#7885;ng c&#7911;a hai
+              b&ecirc;n.
+            </p>
+          </article>
+
+          <article>
+            <span>04</span>
+            <h3>Offer</h3>
+            <p>
+              N&#7871;u ph&ugrave; h&#7907;p, ch&uacute;ng t&ocirc;i g&#7917;i offer v&agrave; th&#7889;ng nh&#7845;t th&#7901;i &#273;i&#7875;m b&#7855;t &#273;&#7847;u.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="recruitment-cta">
+        <div>
+          <p class="recruitment-kicker">CAREERS</p>
+          <h2>Kh&ocirc;ng th&#7845;y v&#7883; tr&iacute; ph&ugrave; h&#7907;p?</h2>
+          <p>
+            B&#7841;n v&#7851;n c&oacute; th&#7875; g&#7917;i CV v&agrave; portfolio &#273;&#7875; team l&#432;u h&#7891; s&#417; cho nh&#7919;ng &#273;&#7907;t
+            tuy&#7875;n d&#7909;ng ti&#7871;p theo.
+          </p>
+        </div>
+
+        <a href="mailto:careers@hadesstudio.vn?subject=Ung%20tuyen%20tu%20do">
+          careers@hadesstudio.vn
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h2 class="footer-logo">HADES</h2>
+          <p class="footer-desc">
+            Streetwear brand mang phong c&aacute;ch hi&#7879;n &#273;&#7841;i, c&aacute; t&iacute;nh v&agrave; &#273;&#7853;m ch&#7845;t ri&ecirc;ng.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>SHOP</h3>
+          <ul>
+            <li><a href="tops.html#product-list">TOPS</a></li>
+            <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+            <li><a href="outerwear.html#product-list">OUTERWEAR</a></li>
+            <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>SUPPORT</h3>
+          <ul>
+            <li><a href="auth.html">ACCOUNT</a></li>
+            <li><a href="checkout.html">CHECKOUT</a></li>
+            <li><a href="recruitment.html">CAREERS</a></li>
+            <li><a href="project-info.html">PROJECT INFO</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>FOLLOW US</h3>
+          <div class="footer-social">
+            <i class="bx bxl-facebook"></i>
+            <i class="bx bxl-instagram"></i>
+            <i class="bx bxl-tiktok"></i>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HADES STUDIO. ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+
+    <div class="search-overlay" id="searchOverlay"></div>
+    <div class="search-drawer" id="searchDrawer">
+      <div class="search-header">
+        <h3 class="search-title">T&#204;M KI&#7870;M</h3>
+        <span class="close" onclick="closeSearch()">x</span>
+      </div>
+
+      <div class="search-body">
+        <input
+          class="search-input"
+          type="text"
+          placeholder="T&igrave;m theo t&ecirc;n s&#7843;n ph&#7849;m"
+        />
+        <div class="search-results"></div>
+      </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-header">
+        <select class="cart-lang">
+          <option>EN</option>
+        </select>
+
+        <span class="close" onclick="closeCart()">x</span>
+      </div>
+
+      <h3 class="cart-title">GI&#7886; H&#192;NG</h3>
+
+      <div class="cart-body"></div>
+
+      <div class="cart-nav">
+        <span><</span>
+        <span>></span>
+      </div>
+
+      <hr class="cart-line" />
+
+      <div class="cart-total">
+        <span>TOTAL</span>
+        <span>0 &#8363;</span>
+      </div>
+
+      <div class="cart-actions">
+        <button type="button">XEM GI&#7886; H&#192;NG</button>
+        <button type="button">THANH TO&Aacute;N</button>
+      </div>
+    </div>
+
+    <script src="../js/product.js"></script>
+    <script src="../js/app-core.js"></script>
+    <script src="../js/app-render.js"></script>
+    <script src="../js/app-search.js"></script>
+    <script src="../js/app-catalog.js"></script>
+    <script src="../js/app-cart.js"></script>
+    <script src="../js/app-auth.js"></script>
+    <script src="../js/app-ui.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+      let recruitmentPlayer = null;
+
+      function updateSoundButton(isMuted) {
+        const btn = document.querySelector(".sound-btn");
+        if (!btn) return;
+
+        btn.innerHTML = isMuted ? "&#128263;" : "&#128266;";
+        btn.setAttribute("aria-label", isMuted ? "Bật âm thanh" : "Tắt âm thanh");
+      }
+
+      function onYouTubeIframeAPIReady() {
+        recruitmentPlayer = new YT.Player("video", {
+          videoId: "CsCgX0Cm44g",
+          playerVars: {
+            autoplay: 1,
+            mute: 1,
+            loop: 1,
+            playlist: "CsCgX0Cm44g",
+            controls: 0,
+            playsinline: 1,
+            rel: 0,
+            modestbranding: 1,
+            iv_load_policy: 3,
+            fs: 0,
+            disablekb: 1,
+          },
+          events: {
+            onReady(event) {
+              event.target.mute();
+              event.target.playVideo();
+              updateSoundButton(true);
+            },
+          },
+        });
+      }
+
+      function toggleSound() {
+        if (!recruitmentPlayer) return;
+
+        if (recruitmentPlayer.isMuted()) {
+          recruitmentPlayer.unMute();
+          updateSoundButton(false);
+          return;
+        }
+
+        recruitmentPlayer.mute();
+        updateSoundButton(true);
+      }
+    </script>
+  </body>
+</html>
+
+
+
+
+

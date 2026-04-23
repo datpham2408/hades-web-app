@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>T&agrave;i kho&#7843;n</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/cart.css" />
+  </head>
+  <body>
+    <header>
+      <div class="auth-header">
+        <a href="index.html" aria-label="V&#7873; trang ch&#7911;">
+          <img
+            src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
+            class="logo"
+            alt="logo"
+          />
+        </a>
+
+        <div class="auth-nav">
+          <a href="index.html">Trang ch&#7911;</a>
+          <a href="project-info.html">Th&ocirc;ng tin</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="overlay"></div>
+
+    <div class="mobile-menu">
+      <i class="bx bx-x menu-close"></i>
+
+      <ul>
+        <li><a href="index.html#product-list">SHOP ALL</a></li>
+        <li><a href="tops.html#product-list">TOPS</a></li>
+        <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
+        <li><a href="outerwear.html#product-list">OUTERWEARS</a></li>
+        <li><a href="underwear.html#product-list">UNDERWEARS</a></li>
+        <li><a href="bags.html#product-list">BAGS</a></li>
+        <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
+        <li><a href="sale.html#product-list">SALE</a></li>
+        <li><a href="recruitment.html">RECRUITMENT</a></li>
+        <li><a href="project-info.html">TH&Ocirc;NG TIN</a></li>
+      </ul>
+    </div>
+
+    <div class="auth-container">
+      <form id="register-form" class="auth-form" style="display: none" novalidate>
+        <h2>&#272;&#259;ng k&yacute;</h2>
+
+        <label for="register-name">H&#7885; v&agrave; t&ecirc;n *</label>
+        <input
+          id="register-name"
+          name="fullName"
+          type="text"
+          placeholder="Nh&#7853;p h&#7885; t&ecirc;n t&#7841;i &#273;&acirc;y"
+          autocomplete="name"
+        />
+        <p class="auth-error" id="register-name-error"></p>
+
+        <label for="register-phone">S&#7889; &#273;i&#7879;n tho&#7841;i *</label>
+        <input
+          id="register-phone"
+          name="phone"
+          type="text"
+          placeholder="Nh&#7853;p s&#7889; &#273;i&#7879;n tho&#7841;i t&#7841;i &#273;&acirc;y"
+          inputmode="numeric"
+          autocomplete="tel"
+        />
+        <p class="auth-error" id="register-phone-error"></p>
+
+        <label for="register-email">Email *</label>
+        <input
+          id="register-email"
+          name="email"
+          type="email"
+          placeholder="Th&ocirc;ng tin n&agrave;y c&#7847;n b&#7855;t bu&#7897;c"
+          autocomplete="email"
+        />
+        <p class="auth-error" id="register-email-error"></p>
+
+        <label for="register-birthdate">Ng&agrave;y sinh *</label>
+        <input id="register-birthdate" name="birthdate" type="date" />
+        <p class="auth-error" id="register-birthdate-error"></p>
+
+        <label for="register-gender">Gi&#7899;i t&iacute;nh *</label>
+        <select id="register-gender" name="gender">
+          <option value="">Ch&#7885;n gi&#7899;i t&iacute;nh</option>
+          <option value="Nam">Nam</option>
+          <option value="Nữ">N&#7919;</option>
+        </select>
+        <p class="auth-error" id="register-gender-error"></p>
+
+        <label for="register-password">M&#7853;t kh&#7849;u *</label>
+        <input
+          id="register-password"
+          name="password"
+          type="password"
+          placeholder="M&#7853;t kh&#7849;u"
+          autocomplete="new-password"
+        />
+        <p class="auth-error" id="register-password-error"></p>
+
+        <button type="submit">&#272;&#259;ng k&yacute;</button>
+        <p class="auth-success" id="register-success"></p>
+
+        <p onclick="showLogin()">B&#7841;n &#273;&atilde; c&oacute; t&agrave;i kho&#7843;n? &#272;&#259;ng nh&#7853;p t&#7841;i &#273;&acirc;y</p>
+      </form>
+
+      <div id="login-form" class="auth-form">
+        <h2>&#272;&#259;ng nh&#7853;p</h2>
+
+        <label>S&#7889; &#273;i&#7879;n tho&#7841;i *</label>
+        <input type="text" placeholder="S&#7889; &#273;i&#7879;n tho&#7841;i" />
+
+        <label>M&#7853;t kh&#7849;u *</label>
+        <input type="password" placeholder="M&#7853;t kh&#7849;u" />
+
+        <p class="forgot" onclick="openForgot()">Qu&ecirc;n th&ocirc;ng tin t&agrave;i kho&#7843;n</p>
+
+        <button type="button">&#272;&#259;ng nh&#7853;p</button>
+
+        <p onclick="showRegister()">B&#7841;n ch&#432;a c&oacute; t&agrave;i kho&#7843;n? &#272;&#259;ng k&yacute; ngay</p>
+      </div>
+    </div>
+
+    <div class="forgot-overlay" id="forgotModal">
+      <div class="forgot-box">
+        <span class="close-btn" onclick="closeForgot()">x</span>
+
+        <h2>Qu&ecirc;n m&#7853;t kh&#7849;u</h2>
+
+        <input type="text" placeholder="Email/S&#272;T..." />
+
+        <button type="button">G&#7917;i y&ecirc;u c&#7847;u</button>
+      </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-header">
+        <select class="cart-lang">
+          <option>EN</option>
+        </select>
+
+        <span class="close" onclick="closeCart()">x</span>
+      </div>
+
+      <h3 class="cart-title">GI&#7886; H&#192;NG</h3>
+
+      <div class="cart-body"></div>
+
+      <div class="cart-nav">
+        <span><</span>
+        <span>></span>
+      </div>
+
+      <hr class="cart-line" />
+
+      <div class="cart-total">
+        <span>TOTAL</span>
+        <span>0 &#8363;</span>
+      </div>
+
+      <div class="cart-actions">
+        <button type="button">XEM GI&#7886; H&#192;NG</button>
+        <button type="button">THANH TO&Aacute;N</button>
+      </div>
+    </div>
+
+    <script src="../js/app-core.js"></script>
+    <script src="../js/app-render.js"></script>
+    <script src="../js/app-search.js"></script>
+    <script src="../js/app-catalog.js"></script>
+    <script src="../js/app-cart.js"></script>
+    <script src="../js/app-auth.js"></script>
+    <script src="../js/app-ui.js"></script>
+    <script>
+      document.getElementById("forgotModal").onclick = (e) => {
+        if (e.target.id === "forgotModal") {
+          closeForgot();
+        }
+      };
+    </script>
+  </body>
+</html>
+
+
