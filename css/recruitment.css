@@ -323,6 +323,7 @@
 @media (max-width: 768px) {
   .recruitment-hero {
     min-height: 66vh;
+    margin-top: 92px;
   }
 
   .recruitment-hero-content {
@@ -367,6 +368,7 @@
 @media (max-width: 425px) {
   .recruitment-hero {
     min-height: 60vh;
+    margin-top: 86px;
   }
 
   .recruitment-hero-content h1 {
