@@ -23,7 +23,7 @@
       <nav class="navbar">
         <div class="nav-group">
           <div class="nav-logo">
-            <a href="index.html" aria-label="V&#7873; trang ch&#7911;">
+            <a href="../index.html" aria-label="V&#7873; trang ch&#7911;">
               <img
                 src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
                 alt="logo"
@@ -32,7 +32,7 @@
           </div>
 
           <ul class="nav-menu">
-            <li><a href="index.html#product-list">SHOP ALL</a></li>
+            <li><a href="../index.html#product-list">SHOP ALL</a></li>
             <li><a href="tops.html#product-list">TOPS</a></li>
             <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
             <li><a href="outerwear.html#product-list">OUTERWEARS</a></li>
@@ -58,7 +58,7 @@
         </div>
 
         <div class="mobile-top">
-          <a href="index.html" aria-label="V&#7873; trang ch&#7911;">
+          <a href="../index.html" aria-label="V&#7873; trang ch&#7911;">
             <img
               src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
               alt="logo"
@@ -87,7 +87,7 @@
       <i class="bx bx-x menu-close"></i>
 
       <ul>
-        <li><a href="index.html#product-list">SHOP ALL</a></li>
+        <li><a href="../index.html#product-list">SHOP ALL</a></li>
         <li><a href="tops.html#product-list">TOPS</a></li>
         <li><a href="bottoms.html#product-list">BOTTOMS</a></li>
         <li><a href="outerwear.html#product-list">OUTERWEARS</a></li>
@@ -101,9 +101,14 @@
     </div>
 
     <section class="recruitment-video recruitment-hero">
-      <div
+      <iframe
         id="video"
-      ></div>
+        src="https://www.youtube.com/embed/CsCgX0Cm44g?autoplay=1&mute=1&loop=1&playlist=CsCgX0Cm44g&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1&enablejsapi=1"
+        title="Recruitment video"
+        frameborder="0"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+      ></iframe>
 
       <div class="recruitment-hero-overlay"></div>
 
@@ -397,9 +402,8 @@
     <script src="../js/app-cart.js"></script>
     <script src="../js/app-auth.js"></script>
     <script src="../js/app-ui.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-      let recruitmentPlayer = null;
+      let recruitmentVideoMuted = true;
 
       function updateSoundButton(isMuted) {
         const btn = document.querySelector(".sound-btn");
@@ -409,44 +413,45 @@
         btn.setAttribute("aria-label", isMuted ? "Bật âm thanh" : "Tắt âm thanh");
       }
 
-      function onYouTubeIframeAPIReady() {
-        recruitmentPlayer = new YT.Player("video", {
-          videoId: "CsCgX0Cm44g",
-          playerVars: {
-            autoplay: 1,
-            mute: 1,
-            loop: 1,
-            playlist: "CsCgX0Cm44g",
-            controls: 0,
-            playsinline: 1,
-            rel: 0,
-            modestbranding: 1,
-            iv_load_policy: 3,
-            fs: 0,
-            disablekb: 1,
-          },
-          events: {
-            onReady(event) {
-              event.target.mute();
-              event.target.playVideo();
-              updateSoundButton(true);
-            },
-          },
+      function sendYouTubeCommand(func) {
+        const iframe = document.getElementById("video");
+
+        if (!iframe || !iframe.contentWindow) {
+          return;
+        }
+
+        iframe.contentWindow.postMessage(
+          JSON.stringify({
+            event: "command",
+            func,
+            args: [],
+          }),
+          "*",
+        );
+      }
+
+      function initRecruitmentVideo() {
+        const iframe = document.getElementById("video");
+
+        if (!iframe) {
+          return;
+        }
+
+        iframe.addEventListener("load", () => {
+          sendYouTubeCommand("mute");
+          sendYouTubeCommand("playVideo");
+          updateSoundButton(true);
         });
       }
 
       function toggleSound() {
-        if (!recruitmentPlayer) return;
-
-        if (recruitmentPlayer.isMuted()) {
-          recruitmentPlayer.unMute();
-          updateSoundButton(false);
-          return;
-        }
-
-        recruitmentPlayer.mute();
-        updateSoundButton(true);
+        recruitmentVideoMuted = !recruitmentVideoMuted;
+        sendYouTubeCommand(recruitmentVideoMuted ? "mute" : "unMute");
+        updateSoundButton(recruitmentVideoMuted);
       }
+
+      initRecruitmentVideo();
+      updateSoundButton(recruitmentVideoMuted);
     </script>
   </body>
 </html>

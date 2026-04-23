@@ -92,15 +92,15 @@ function getDetailProduct() {
 }
 
 function getDetailImages(product) {
-  return [product.imgFront, product.imgBack].filter(Boolean);
+  return [product.imgFront, product.imgBack].filter(Boolean).map(getImageUrl);
 }
 
 function getDetailCategoryHref(category) {
   if (category === "accessories") {
-    return "accessory.html#product-list";
+    return getPageUrl("accessory.html#product-list");
   }
 
-  return `${category}.html#product-list`;
+  return getPageUrl(`${category}.html#product-list`);
 }
 
 function renderDetailThumbnails(product, images, elements) {
@@ -206,7 +206,7 @@ function saveDetailItemToCart(redirectToCheckout = false) {
 
   if (redirectToCheckout) {
     saveCartStorage([detailItem]);
-    window.location.href = "checkout.html";
+    window.location.href = getPageUrl("checkout.html");
     return;
   }
 

@@ -37,7 +37,7 @@ function getCheckoutItemMarkup(item) {
     <article class="checkout-item">
       <img
         class="checkout-item-image"
-        src="${item.imgFront}"
+        src="${getImageUrl(item.imgFront)}"
         alt="${item.name}"
       />
 

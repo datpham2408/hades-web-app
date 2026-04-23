@@ -151,6 +151,28 @@ function setBodyState(className, isActive) {
   document.body.classList.toggle(className, isActive);
 }
 
+function getSiteRootPrefix() {
+  return window.location.pathname.includes("/html/") ? "" : "html/";
+}
+
+function getPageUrl(page) {
+  return `${getSiteRootPrefix()}${page}`;
+}
+
+function getImageUrl(path) {
+  if (!path) {
+    return path;
+  }
+
+  const isHtmlPage = window.location.pathname.includes("/html/");
+
+  if (isHtmlPage) {
+    return path.startsWith("../") ? path : `../${path}`;
+  }
+
+  return path.startsWith("../") ? path.replace(/^\.\.\//, "") : path;
+}
+
 function buildCartItem(product, overrides = {}) {
   return {
     ...product,

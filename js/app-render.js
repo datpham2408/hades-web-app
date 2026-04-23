@@ -18,12 +18,14 @@ function getCartVariantText(item) {
 }
 
 function getProductCardMarkup(product) {
+  const detailUrl = getPageUrl(`product-detail.html?id=${product.id}`);
+
   return `
     <div class="product-card">
-      <a class="product-link" href="product-detail.html?id=${product.id}">
+      <a class="product-link" href="${detailUrl}">
         <div class="product-image">
-          <img src="${product.imgFront}" class="img-front" />
-          <img src="${product.imgBack}" class="img-back" />
+          <img src="${getImageUrl(product.imgFront)}" class="img-front" />
+          <img src="${getImageUrl(product.imgBack)}" class="img-back" />
         </div>
       </a>
 
@@ -39,7 +41,7 @@ function getProductCardMarkup(product) {
       </div>
 
       <div class="product-info">
-        <a class="product-name-link" href="product-detail.html?id=${product.id}">
+        <a class="product-name-link" href="${detailUrl}">
           <p class="product-name">${product.name}</p>
         </a>
         <span class="product-price">${getProductPriceMarkup(product)}</span>
@@ -52,7 +54,7 @@ function getCartItemMarkup(item) {
   return `
     <article class="cart-item">
       <div class="cart-item-media">
-        <img class="cart-item-image" src="${item.imgFront}" alt="${item.name}">
+        <img class="cart-item-image" src="${getImageUrl(item.imgFront)}" alt="${item.name}">
       </div>
 
       <div class="cart-item-content">
@@ -105,11 +107,13 @@ function getCartItemMarkup(item) {
 }
 
 function getSearchResultMarkup(product) {
+  const detailUrl = getPageUrl(`product-detail.html?id=${product.id}`);
+
   return `
-    <a class="search-result-item" href="product-detail.html?id=${product.id}">
+    <a class="search-result-item" href="${detailUrl}">
       <img
         class="search-result-image"
-        src="${product.imgFront}"
+        src="${getImageUrl(product.imgFront)}"
         alt="${product.name}"
       >
 

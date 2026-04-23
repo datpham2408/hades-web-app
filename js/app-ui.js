@@ -71,7 +71,7 @@ function handleDocumentClick(event) {
     const buttonIndex = actions.indexOf(cartActionButton);
 
     if (buttonIndex === 1) {
-      window.location.href = "checkout.html";
+      window.location.href = getPageUrl("checkout.html");
       return;
     }
   }

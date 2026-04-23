@@ -36,7 +36,7 @@ function buyNow(id) {
   }
 
   saveCartStorage([buildCartItem(product)]);
-  window.location.href = "checkout.html";
+  window.location.href = getPageUrl("checkout.html");
 }
 
 function removeItem(id) {
