@@ -812,6 +812,10 @@
     padding-top: 2px;
   }
 
+  .nav-logo img {
+    width: 160px;
+  }
+
   .mobile-menu {
     top: 92px;
     width: min(82vw, 360px);
@@ -835,7 +839,7 @@
   }
 
   .hero {
-    height: 92vh;
+    height: 72vh;
     overflow: hidden;
   }
 
@@ -861,7 +865,14 @@
   }
 
   .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
+    padding: 0 12px;
+  }
+
+  .product-card {
+    width: 100%;
+    max-width: 100%;
   }
 
   .footer-container {
@@ -877,6 +888,11 @@
   .mobile-top > img:last-child {
     max-width: 40%;
     height: 12px;
+  }
+
+  .navbar {
+    min-height: 86px;
+    padding: 10px 12px 10px;
   }
 
   .mobile-menu {
@@ -895,7 +911,7 @@
   }
 
   .hero {
-    height: 100vh;
+    height: 62vh;
     overflow: hidden;
   }
 
@@ -906,7 +922,24 @@
   }
 
   .marquee span {
-    margin-right: 30px;
+    margin-right: 24px;
+    font-size: clamp(22px, 7vw, 44px);
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 14px;
+  }
+
+  .product-card {
+    max-width: 100%;
+  }
+
+  #pagination {
+    gap: 14px;
+    margin: 36px 0;
+    flex-wrap: wrap;
   }
 
   .footer-container {
@@ -921,10 +954,18 @@
 
 @media (max-width: 375px) {
   .mobile-top > a img {
-    height: 24px;
+    height: 20px;
   }
 
   .mobile-top > img:last-child {
     max-width: 50%;
+  }
+
+  .nav-logo img {
+    width: 140px;
+  }
+
+  .mobile-menu {
+    width: 92vw;
   }
 }

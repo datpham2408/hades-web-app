@@ -322,11 +322,16 @@
 
 @media (max-width: 768px) {
   .recruitment-hero {
-    min-height: 74vh;
+    min-height: 66vh;
   }
 
   .recruitment-hero-content {
-    padding: 124px 18px 38px;
+    max-width: 100%;
+    padding: 104px 18px 34px;
+  }
+
+  .recruitment-hero-content h1 {
+    font-size: clamp(36px, 8vw, 64px);
   }
 
   .recruitment-main {
@@ -350,15 +355,27 @@
     width: 100%;
     min-width: 0;
   }
+
+  .recruitment-page .sound-btn {
+    right: 14px;
+    bottom: 14px;
+    width: 44px;
+    height: 44px;
+  }
 }
 
 @media (max-width: 425px) {
   .recruitment-hero {
-    min-height: 82vh;
+    min-height: 60vh;
   }
 
   .recruitment-hero-content h1 {
     max-width: 100%;
+    font-size: clamp(32px, 10vw, 50px);
+  }
+
+  .recruitment-hero-content {
+    padding: 92px 16px 28px;
   }
 
   .recruitment-feature-card,
@@ -367,5 +384,18 @@
   .recruitment-process-grid article,
   .recruitment-cta {
     padding: 20px;
+  }
+
+  .recruitment-lead {
+    font-size: 14px;
+  }
+
+  .recruitment-hero-actions {
+    width: 100%;
+  }
+
+  .recruitment-primary-btn,
+  .recruitment-secondary-btn {
+    width: 100%;
   }
 }
