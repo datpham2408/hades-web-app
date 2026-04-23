@@ -1,5 +1,6 @@
 function sortProducts(list, type) {
-  const sorted = [...list];
+  const availableList = getAvailableProducts(list);
+  const sorted = [...availableList];
 
   switch (type) {
     case "price-asc":
@@ -15,6 +16,10 @@ function sortProducts(list, type) {
     default:
       return sorted;
   }
+}
+
+function getAvailableProducts(list) {
+  return list.filter((product) => Number(product.stock ?? 1) > 0);
 }
 
 function getProductsByPage(list, page) {
@@ -92,6 +97,7 @@ function initProductPage(category) {
   const sortSelect = document.getElementById("sort");
   const filteredList = productData.filter((product) => product.category === category);
 
+  perPage = 8;
   currentList = filteredList;
   renderProducts(filteredList);
 
@@ -100,6 +106,34 @@ function initProductPage(category) {
       currentList = sortProducts(filteredList, sortSelect.value);
       renderProducts(currentList);
     });
+  }
+}
+
+function initShopAllPage() {
+  const sortSelect = document.getElementById("sort");
+  const productList = document.getElementById("product-list");
+  const pagination = document.getElementById("pagination");
+
+  if (!productList) {
+    return;
+  }
+
+  perPage = 20;
+  currentList = productData;
+  currentPage = 1;
+
+  renderProducts(getProductsByPage(currentList, currentPage));
+  renderPagination(currentList);
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      currentPage = 1;
+      currentList = sortProducts(productData, sortSelect.value);
+      renderProducts(getProductsByPage(currentList, currentPage));
+      renderPagination(currentList);
+    });
+  } else if (pagination) {
+    renderPagination(currentList);
   }
 }
 
@@ -116,10 +150,12 @@ function updateLanguageSelectors() {
 function updateStaticText() {
   const login = qs(SELECTORS.navLogin);
   const search = qs(SELECTORS.navSearch);
+  const projectInfo = qsa(SELECTORS.navProjectInfo);
   const searchTitle = qs(SELECTORS.searchTitle);
   const searchInput = qs(SELECTORS.searchInput);
   const cartTitle = qs(SELECTORS.cartTitle);
   const totalLabel = qs(SELECTORS.cartTotalLabel);
+  const footerDesc = qs(".footer-desc");
   const actionButtons = qsa(".cart-actions button");
   const sortSelect = document.getElementById("sort");
 
@@ -131,6 +167,10 @@ function updateStaticText() {
     search.textContent = t("search");
   }
 
+  projectInfo.forEach((node) => {
+    node.textContent = t("projectInfo");
+  });
+
   if (searchTitle) {
     searchTitle.textContent = t("searchTitle");
   }
@@ -141,6 +181,10 @@ function updateStaticText() {
 
   if (cartTitle) {
     cartTitle.textContent = t("cartTitle");
+  }
+
+  if (footerDesc) {
+    footerDesc.textContent = t("footerDesc");
   }
 
   if (totalLabel) {
@@ -166,6 +210,10 @@ function updateStaticText() {
       }
     });
   }
+
+  if (typeof updateThemeToggleButtons === "function") {
+    updateThemeToggleButtons();
+  }
 }
 
 function refreshVisibleProducts() {
@@ -186,6 +234,7 @@ function refreshVisibleProducts() {
 }
 
 function applyLanguage() {
+  document.documentElement.lang = currentLanguage;
   updateLanguageSelectors();
   updateStaticText();
   refreshVisibleProducts();
@@ -198,4 +247,5 @@ function setLanguage(language) {
   currentLanguage = language;
   localStorage.setItem(STORAGE_KEYS.language, language);
   applyLanguage();
+  window.dispatchEvent(new CustomEvent("languagechange", { detail: { language } }));
 }

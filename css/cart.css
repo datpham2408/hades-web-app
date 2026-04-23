@@ -394,6 +394,95 @@
   background: #222;
 }
 
+body.dark-theme .cart-overlay,
+body.dark-theme .search-overlay {
+  background: rgba(0, 0, 0, 0.82);
+}
+
+body.dark-theme .cart-drawer,
+body.dark-theme .search-drawer {
+  background: #0f0f11;
+  border-left-color: rgba(255, 255, 255, 0.08);
+  box-shadow: -18px 0 48px rgba(0, 0, 0, 0.34);
+  color: #f4f4f1;
+}
+
+body.dark-theme .cart-lang {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f4f4f1;
+}
+
+body.dark-theme .close {
+  color: #f4f4f1;
+}
+
+body.dark-theme .cart-title,
+body.dark-theme .search-title {
+  color: #f4f4f1;
+}
+
+body.dark-theme .search-input {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: #f4f4f1;
+}
+
+body.dark-theme .search-input:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .search-empty-state,
+body.dark-theme .cart-empty,
+body.dark-theme .checkout-empty,
+body.dark-theme .payment-details-note,
+body.dark-theme .checkout-item-variant,
+body.dark-theme .checkout-item-quantity {
+  color: #a9a9a3;
+}
+
+body.dark-theme .search-result-item,
+body.dark-theme .cart-item {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .search-result-item:hover,
+body.dark-theme .cart-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+body.dark-theme .search-result-image,
+body.dark-theme .cart-item-image,
+body.dark-theme .checkout-item-image {
+  background: #151518;
+}
+
+body.dark-theme .cart-nav {
+  color: #a9a9a3;
+}
+
+body.dark-theme .cart-line {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .cart-total {
+  color: #f4f4f1;
+}
+
+body.dark-theme .cart-actions button,
+body.dark-theme .discount-button,
+body.dark-theme .place-order-button {
+  background: #f4f4f1;
+  color: #111;
+}
+
+body.dark-theme .cart-actions button:hover,
+body.dark-theme .discount-button:hover,
+body.dark-theme .place-order-button:hover {
+  background: #fff;
+}
+
 @keyframes cartItemEnter {
   from {
     opacity: 0;

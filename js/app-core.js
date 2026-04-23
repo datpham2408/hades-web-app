@@ -3,6 +3,7 @@ const STORAGE_KEYS = {
   language: "language",
   authMode: "authMode",
   registeredUser: "registeredUser",
+  theme: "theme",
 };
 
 const SELECTORS = {
@@ -16,6 +17,8 @@ const SELECTORS = {
   searchTitle: ".search-title",
   navLogin: ".nav-login",
   navSearch: ".nav-search",
+    navProjectInfo:
+      '.nav-menu a[href$="project-info.html"], .mobile-menu a[href$="project-info.html"]',
   navLanguage: ".nav-lang, .cart-lang",
   mobileMenu: ".mobile-menu",
   overlay: ".overlay",
@@ -56,12 +59,17 @@ const translations = {
     soldOut: "H\u1ebeT H\u00c0NG",
     sale: "KHUY\u1ebeN M\u00c3I",
     emptyCart: "Hi\u1ec7n ch\u01b0a c\u00f3 s\u1ea3n ph\u1ea9m",
+    projectInfo: "TH\u00d4NG TIN",
+    footerDesc:
+      "Streetwear brand mang phong c\u00e1ch hi\u1ec7n \u0111\u1ea1i, c\u00e1 t\u00ednh v\u00e0 \u0111\u1eadm ch\u1ea5t ri\u00eang.",
     sortNewest: "M\u1edaI NH\u1ea4T",
     sortFeatured: "S\u1ea2N PH\u1ea8M N\u1ed4I B\u1eacT",
     sortPriceAsc: "GI\u00c1: T\u0102NG D\u1ea6N",
     sortPriceDesc: "GI\u00c1: GI\u1ea2M D\u1ea6N",
     sortOldest: "C\u0168 NH\u1ea4T",
     sortBest: "B\u00c1N CH\u1ea0Y NH\u1ea4T",
+    themeDark: "N\u00e9n \u0111en",
+    themeLight: "N\u00e9n s\u00e1ng",
   },
   en: {
     login: "LOGIN",
@@ -80,17 +88,21 @@ const translations = {
     soldOut: "SOLD OUT",
     sale: "SALE",
     emptyCart: "Your cart is empty",
+    projectInfo: "PROJECT INFO",
+    footerDesc: "A modern streetwear brand with a distinct, confident personality.",
     sortNewest: "NEWEST",
     sortFeatured: "FEATURED",
     sortPriceAsc: "PRICE: LOW TO HIGH",
     sortPriceDesc: "PRICE: HIGH TO LOW",
     sortOldest: "OLDEST",
     sortBest: "BEST SELLING",
+    themeDark: "Dark mode",
+    themeLight: "Light mode",
   },
 };
 
 const productData = typeof products !== "undefined" ? products : [];
-const perPage = 8;
+let perPage = 8;
 
 let currentList = productData;
 let currentPage = 1;
@@ -118,21 +130,16 @@ function t(key) {
 }
 
 function getCurrencyFormatter() {
-  if (currentLanguage === "en") {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-  }
+  const locale = currentLanguage === "en" ? "en-US" : "vi-VN";
 
-  return new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
+  return new Intl.NumberFormat(locale, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   });
 }
 
 function formatPrice(price) {
-  return getCurrencyFormatter().format(price);
+  return `${getCurrencyFormatter().format(price)} ₫`;
 }
 
 function readStorage(key, fallback) {

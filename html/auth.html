@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>T&agrave;i kho&#7843;n</title>
+    <title>Tài khoản</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,12 +15,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/auth-page.css" />
     <link rel="stylesheet" href="../css/cart.css" />
   </head>
-  <body>
+  <body class="auth-page">
     <header>
       <div class="auth-header">
-        <a href="../index.html" aria-label="V&#7873; trang ch&#7911;">
+        <a href="../index.html" aria-label="Về trang chủ">
           <img
             src="https://theme.hstatic.net/1000306633/1001194548/14/logo_menu_no_scroll.png?v=506"
             class="logo"
@@ -29,8 +30,12 @@
         </a>
 
         <div class="auth-nav">
-          <a href="../index.html">Trang ch&#7911;</a>
-          <a href="project-info.html">Th&ocirc;ng tin</a>
+          <a href="../index.html">Trang chủ</a>
+          <a href="project-info.html">Thông tin</a>
+          <select class="nav-lang auth-lang">
+            <option value="vi">VI</option>
+            <option value="en">EN</option>
+          </select>
         </div>
       </div>
     </header>
@@ -50,99 +55,175 @@
         <li><a href="accessory.html#product-list">ACCESSORIES</a></li>
         <li><a href="sale.html#product-list">SALE</a></li>
         <li><a href="recruitment.html">RECRUITMENT</a></li>
-        <li><a href="project-info.html">TH&Ocirc;NG TIN</a></li>
+        <li><a href="project-info.html">THÔNG TIN</a></li>
       </ul>
     </div>
 
-    <div class="auth-container">
-      <form id="register-form" class="auth-form" style="display: none" novalidate>
-        <h2>&#272;&#259;ng k&yacute;</h2>
+    <main class="auth-page-shell">
+      <section class="auth-visual">
+        <div class="auth-image-stack" aria-label="Lookbook">
+          <figure class="auth-image-card auth-image-card-large">
+            <img src="../img/auth-lookbook-1.jpg" alt="Streetwear lookbook 1" />
+            <figcaption>
+              <span>01</span>
+              <strong>LOOKBOOK A</strong>
+            </figcaption>
+          </figure>
 
-        <label for="register-name">H&#7885; v&agrave; t&ecirc;n *</label>
-        <input
-          id="register-name"
-          name="fullName"
-          type="text"
-          placeholder="Nh&#7853;p h&#7885; t&ecirc;n t&#7841;i &#273;&acirc;y"
-          autocomplete="name"
-        />
-        <p class="auth-error" id="register-name-error"></p>
+          <figure class="auth-image-card auth-image-card-small">
+            <img src="../img/auth-lookbook-2.jpg" alt="Streetwear lookbook 2" />
+            <figcaption>
+              <span>02</span>
+              <strong>LOOKBOOK B</strong>
+            </figcaption>
+          </figure>
+        </div>
 
-        <label for="register-phone">S&#7889; &#273;i&#7879;n tho&#7841;i *</label>
-        <input
-          id="register-phone"
-          name="phone"
-          type="text"
-          placeholder="Nh&#7853;p s&#7889; &#273;i&#7879;n tho&#7841;i t&#7841;i &#273;&acirc;y"
-          inputmode="numeric"
-          autocomplete="tel"
-        />
-        <p class="auth-error" id="register-phone-error"></p>
+        <div class="auth-visual-copy">
+          <span class="auth-eyebrow">HADES ACCESS</span>
+          <h1>Streetwear drop member-only energy.</h1>
+          <p>
+            Đăng nhập để checkout nhanh hơn, lưu size quen tay và nhận những đợt
+            release mới trước khi lên trang chủ.
+          </p>
+        </div>
 
-        <label for="register-email">Email *</label>
-        <input
-          id="register-email"
-          name="email"
-          type="email"
-          placeholder="Th&ocirc;ng tin n&agrave;y c&#7847;n b&#7855;t bu&#7897;c"
-          autocomplete="email"
-        />
-        <p class="auth-error" id="register-email-error"></p>
+        <ul class="auth-pills" aria-label="Lợi ích tài khoản">
+          <li>Private drops</li>
+          <li>Saved sizes</li>
+          <li>Quick checkout</li>
+        </ul>
+      </section>
 
-        <label for="register-birthdate">Ng&agrave;y sinh *</label>
-        <input id="register-birthdate" name="birthdate" type="date" />
-        <p class="auth-error" id="register-birthdate-error"></p>
+      <section class="auth-panel">
+        <div class="auth-panel-top">
+          <div class="auth-mode-switch" aria-label="Chuyển chế độ đăng nhập">
+            <button type="button" class="auth-mode-btn" onclick="showLogin()">
+              Đăng nhập
+            </button>
+            <button
+              type="button"
+              class="auth-mode-btn"
+              onclick="showRegister()"
+            >
+              Đăng ký
+            </button>
+          </div>
+        </div>
 
-        <label for="register-gender">Gi&#7899;i t&iacute;nh *</label>
-        <select id="register-gender" name="gender">
-          <option value="">Ch&#7885;n gi&#7899;i t&iacute;nh</option>
-          <option value="Nam">Nam</option>
-          <option value="Nữ">N&#7919;</option>
-        </select>
-        <p class="auth-error" id="register-gender-error"></p>
+        <div class="auth-container">
+          <form
+            id="register-form"
+            class="auth-form"
+            style="display: none"
+            novalidate
+          >
+            <h2>Đăng ký</h2>
 
-        <label for="register-password">M&#7853;t kh&#7849;u *</label>
-        <input
-          id="register-password"
-          name="password"
-          type="password"
-          placeholder="M&#7853;t kh&#7849;u"
-          autocomplete="new-password"
-        />
-        <p class="auth-error" id="register-password-error"></p>
+            <label for="register-name">Họ và tên *</label>
+            <input
+              id="register-name"
+              name="fullName"
+              type="text"
+              required
+              placeholder="Nhập họ tên tại đây"
+              autocomplete="name"
+            />
+            <p class="auth-error" id="register-name-error"></p>
 
-        <button type="submit">&#272;&#259;ng k&yacute;</button>
-        <p class="auth-success" id="register-success"></p>
+            <label for="register-phone">Số điện thoại *</label>
+            <input
+              id="register-phone"
+              name="phone"
+              type="text"
+              required
+              placeholder="Nhập số điện thoại tại đây"
+              inputmode="numeric"
+              autocomplete="tel"
+            />
+            <p class="auth-error" id="register-phone-error"></p>
 
-        <p onclick="showLogin()">B&#7841;n &#273;&atilde; c&oacute; t&agrave;i kho&#7843;n? &#272;&#259;ng nh&#7853;p t&#7841;i &#273;&acirc;y</p>
-      </form>
+            <label for="register-email">Email *</label>
+            <input
+              id="register-email"
+              name="email"
+              type="email"
+              required
+              placeholder="Thông tin này cần bắt buộc"
+              autocomplete="email"
+            />
+            <p class="auth-error" id="register-email-error"></p>
 
-      <div id="login-form" class="auth-form">
-        <h2>&#272;&#259;ng nh&#7853;p</h2>
+            <label for="register-birthdate">Ngày sinh *</label>
+            <input
+              id="register-birthdate"
+              name="birthdate"
+              type="date"
+              required
+            />
+            <p class="auth-error" id="register-birthdate-error"></p>
 
-        <label>S&#7889; &#273;i&#7879;n tho&#7841;i *</label>
-        <input type="text" placeholder="S&#7889; &#273;i&#7879;n tho&#7841;i" />
+            <label for="register-gender">Giới tính *</label>
+            <select id="register-gender" name="gender" required>
+              <option value="">Chọn giới tính</option>
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+            </select>
+            <p class="auth-error" id="register-gender-error"></p>
 
-        <label>M&#7853;t kh&#7849;u *</label>
-        <input type="password" placeholder="M&#7853;t kh&#7849;u" />
+            <label for="register-password">Mật khẩu *</label>
+            <input
+              id="register-password"
+              name="password"
+              type="password"
+              required
+              placeholder="Mật khẩu"
+              autocomplete="new-password"
+            />
+            <p class="auth-error" id="register-password-error"></p>
 
-        <p class="forgot" onclick="openForgot()">Qu&ecirc;n th&ocirc;ng tin t&agrave;i kho&#7843;n</p>
+            <button type="submit">Đăng ký</button>
+            <p class="auth-success" id="register-success"></p>
 
-        <button type="button">&#272;&#259;ng nh&#7853;p</button>
+            <p onclick="showLogin()">Bạn đã có tài khoản? Đăng nhập tại đây</p>
+          </form>
 
-        <p onclick="showRegister()">B&#7841;n ch&#432;a c&oacute; t&agrave;i kho&#7843;n? &#272;&#259;ng k&yacute; ngay</p>
-      </div>
-    </div>
+          <div id="login-form" class="auth-form">
+            <h2>Đăng nhập</h2>
+
+            <label>Số điện thoại *</label>
+            <input type="text" placeholder="Số điện thoại" />
+
+            <label>Mật khẩu *</label>
+            <input type="password" placeholder="Mật khẩu" />
+
+            <div class="auth-login-meta">
+              <label class="auth-remember">
+                <input type="checkbox" />
+                <span>Ghi nhớ tôi</span>
+              </label>
+              <p class="forgot" onclick="openForgot()">
+                Quên thông tin tài khoản
+              </p>
+            </div>
+
+            <button type="button">Đăng nhập</button>
+
+            <p onclick="showRegister()">Bạn chưa có tài khoản? Đăng ký ngay</p>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <div class="forgot-overlay" id="forgotModal">
       <div class="forgot-box">
         <span class="close-btn" onclick="closeForgot()">x</span>
 
-        <h2>Qu&ecirc;n m&#7853;t kh&#7849;u</h2>
+        <h2>Quên mật khẩu</h2>
 
-        <input type="text" placeholder="Email/S&#272;T..." />
+        <input type="text" placeholder="Email/SĐT..." />
 
-        <button type="button">G&#7917;i y&ecirc;u c&#7847;u</button>
+        <button type="button">Gửi yêu cầu</button>
       </div>
     </div>
 
@@ -156,7 +237,7 @@
         <span class="close" onclick="closeCart()">x</span>
       </div>
 
-      <h3 class="cart-title">GI&#7886; H&#192;NG</h3>
+      <h3 class="cart-title">GIỎ HÀNG</h3>
 
       <div class="cart-body"></div>
 
@@ -169,12 +250,12 @@
 
       <div class="cart-total">
         <span>TOTAL</span>
-        <span>0 &#8363;</span>
+        <span>0 ₫</span>
       </div>
 
       <div class="cart-actions">
-        <button type="button">XEM GI&#7886; H&#192;NG</button>
-        <button type="button">THANH TO&Aacute;N</button>
+        <button type="button">XEM GIỎ HÀNG</button>
+        <button type="button">THANH TOÁN</button>
       </div>
     </div>
 
@@ -186,6 +267,102 @@
     <script src="../js/app-auth.js"></script>
     <script src="../js/app-ui.js"></script>
     <script>
+      const AUTH_EXTRA_TEXT = {
+        vi: {
+          eyebrow: "HADES ACCESS",
+          visualTitle: "Streetwear drop, member-only energy.",
+          visualDesc:
+            "Đăng nhập để checkout nhanh hơn, lưu size quen tay và nhận những đợt release mới trước khi lên trang chủ.",
+          lookbookOne: "LOOKBOOK A",
+          lookbookTwo: "LOOKBOOK B",
+          pillOne: "Private drops",
+          pillTwo: "Saved sizes",
+          pillThree: "Quick checkout",
+          modeLogin: "Đăng nhập",
+          modeRegister: "Đăng ký",
+          remember: "Ghi nhớ tôi",
+          forgot: "Quên thông tin tài khoản",
+          registerLink: "Bạn đã có tài khoản? Đăng nhập tại đây",
+          loginLink: "Bạn chưa có tài khoản? Đăng ký ngay",
+          forgotTitle: "Quên mật khẩu",
+          forgotPlaceholder: "Email/SĐT...",
+          forgotButton: "Gửi yêu cầu",
+        },
+        en: {
+          eyebrow: "HADES ACCESS",
+          visualTitle: "Streetwear drop, member-only energy.",
+          visualDesc:
+            "Sign in to checkout faster, save your usual size, and get new drops before they hit the homepage.",
+          lookbookOne: "LOOKBOOK A",
+          lookbookTwo: "LOOKBOOK B",
+          pillOne: "Private drops",
+          pillTwo: "Saved sizes",
+          pillThree: "Quick checkout",
+          modeLogin: "Login",
+          modeRegister: "Sign up",
+          remember: "Remember me",
+          forgot: "Forgot account details",
+          registerLink: "Already have an account? Sign in here",
+          loginLink: "Don't have an account? Sign up now",
+          forgotTitle: "Forgot password",
+          forgotPlaceholder: "Email/Phone...",
+          forgotButton: "Send request",
+        },
+      };
+
+      function syncAuthExtras() {
+        const lang = localStorage.getItem("language") === "en" ? "en" : "vi";
+        const text = AUTH_EXTRA_TEXT[lang];
+
+        const eyebrow = document.querySelector(".auth-eyebrow");
+        const visualTitle = document.querySelector(".auth-visual-copy h1");
+        const visualDesc = document.querySelector(".auth-visual-copy p");
+        const lookbookTitles = document.querySelectorAll(
+          ".auth-image-card strong",
+        );
+        const pills = document.querySelectorAll(".auth-pills li");
+        const modeButtons = document.querySelectorAll(".auth-mode-btn");
+        const remember = document.querySelector(".auth-remember span");
+        const forgot = document.querySelector(".forgot");
+        const registerLink = document.querySelector(
+          '#register-form p[onclick="showLogin()"]',
+        );
+        const loginLink = document.querySelector(
+          '#login-form p[onclick="showRegister()"]',
+        );
+        const forgotModalTitle = document.querySelector("#forgotModal h2");
+        const forgotModalInput = document.querySelector("#forgotModal input");
+        const forgotModalButton = document.querySelector("#forgotModal button");
+
+        if (eyebrow) eyebrow.textContent = text.eyebrow;
+        if (visualTitle) visualTitle.textContent = text.visualTitle;
+        if (visualDesc) visualDesc.textContent = text.visualDesc;
+        if (lookbookTitles[0]) lookbookTitles[0].textContent = text.lookbookOne;
+        if (lookbookTitles[1]) lookbookTitles[1].textContent = text.lookbookTwo;
+        if (pills[0]) pills[0].textContent = text.pillOne;
+        if (pills[1]) pills[1].textContent = text.pillTwo;
+        if (pills[2]) pills[2].textContent = text.pillThree;
+        if (remember) remember.textContent = text.remember;
+        if (forgot) forgot.textContent = text.forgot;
+        if (registerLink) registerLink.textContent = text.registerLink;
+        if (loginLink) loginLink.textContent = text.loginLink;
+        if (forgotModalTitle) forgotModalTitle.textContent = text.forgotTitle;
+        if (forgotModalInput)
+          forgotModalInput.placeholder = text.forgotPlaceholder;
+        if (forgotModalButton)
+          forgotModalButton.textContent = text.forgotButton;
+        if (modeButtons[0]) modeButtons[0].textContent = text.modeLogin;
+        if (modeButtons[1]) modeButtons[1].textContent = text.modeRegister;
+      }
+
+      window.addEventListener("languagechange", syncAuthExtras);
+      window.addEventListener("storage", (event) => {
+        if (event.key === "language") {
+          syncAuthExtras();
+        }
+      });
+      window.addEventListener("DOMContentLoaded", syncAuthExtras);
+
       document.getElementById("forgotModal").onclick = (e) => {
         if (e.target.id === "forgotModal") {
           closeForgot();
@@ -194,5 +371,3 @@
     </script>
   </body>
 </html>
-
-

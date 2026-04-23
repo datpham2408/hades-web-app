@@ -4,12 +4,17 @@ function getProductPriceMarkup(product) {
   }
 
   if (!product.oldPrice) {
-    return formatPrice(product.price);
+    return `
+      <span class="price-current">${formatPrice(product.price)}</span>
+    `;
   }
 
   return `
     <span class="old-price">${formatPrice(product.oldPrice)}</span>
-    <span class="sale-price">${formatPrice(product.price)} ${t("sale")}</span>
+    <span class="sale-price-row">
+      <span class="price-current">${formatPrice(product.price)}</span>
+      <span class="sale-badge">${t("sale")}</span>
+    </span>
   `;
 }
 
@@ -32,10 +37,12 @@ function getProductCardMarkup(product) {
       <div class="product-image-overlay">
         <div class="product-overlay">
           <button class="buy-now-btn" data-id="${product.id}">
-            ${t("buyNow")}
+            <span class="btn-icon"><i class="bx bx-shopping-bag"></i></span>
+            <span class="btn-text">${t("buyNow")}</span>
           </button>
           <button class="add-cart-btn" data-id="${product.id}">
-            ${t("addToCart")}
+            <span class="btn-icon"><i class="bx bx-cart"></i></span>
+            <span class="btn-text">${t("addToCart")}</span>
           </button>
         </div>
       </div>
@@ -44,7 +51,9 @@ function getProductCardMarkup(product) {
         <a class="product-name-link" href="${detailUrl}">
           <p class="product-name">${product.name}</p>
         </a>
-        <span class="product-price">${getProductPriceMarkup(product)}</span>
+        <div class="product-price ${product.oldPrice ? "is-sale" : ""}">
+          ${getProductPriceMarkup(product)}
+        </div>
       </div>
     </div>
   `;

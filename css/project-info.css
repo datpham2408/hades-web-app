@@ -1,7 +1,8 @@
 .project-info-page {
   background:
     radial-gradient(circle at top left, rgba(0, 0, 0, 0.05), transparent 28%),
-    linear-gradient(180deg, #f6f4ef 0%, #ffffff 28%, #ffffff 100%);
+    radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.03), transparent 22%),
+    linear-gradient(180deg, #f7f7f4 0%, #ffffff 28%, #ffffff 100%);
 }
 
 .project-info-main {
@@ -56,8 +57,9 @@
 .project-info-card,
 .project-info-guide-card {
   border: 1px solid #e8e3d8;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.86);
   box-shadow: 0 18px 48px rgba(17, 17, 17, 0.06);
+  backdrop-filter: blur(8px);
 }
 
 .project-info-card {
@@ -108,6 +110,42 @@
   font-size: 28px;
 }
 
+body.dark-theme.project-info-page {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.04), transparent 22%),
+    linear-gradient(180deg, #060607 0%, #0b0b0d 30%, #0f0f11 100%);
+  color: #f4f4f1;
+}
+
+body.dark-theme.project-info-page .project-info-lead {
+  color: #b8b8b1;
+}
+
+body.dark-theme.project-info-page .project-info-card,
+body.dark-theme.project-info-page .project-info-guide-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(17, 17, 19, 0.88);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+body.dark-theme.project-info-page .project-info-label {
+  color: #a8a8a2;
+}
+
+body.dark-theme.project-info-page .project-info-card p,
+body.dark-theme.project-info-page .project-info-guide-card p {
+  color: #c0c0bb;
+}
+
+body.dark-theme.project-info-page .project-info-kicker,
+body.dark-theme.project-info-page .project-info-hero h1,
+body.dark-theme.project-info-page .project-info-section-head h2,
+body.dark-theme.project-info-page .project-info-card h2,
+body.dark-theme.project-info-page .project-info-guide-card h3 {
+  color: #f4f4f1;
+}
+
 @media (max-width: 768px) {
   .project-info-main {
     padding: 118px 16px 56px;
@@ -116,5 +154,41 @@
   .project-info-grid,
   .project-info-guide-list {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-info-main {
+    padding: 104px 12px 44px;
+  }
+
+  .project-info-hero {
+    padding-bottom: 28px;
+  }
+
+  .project-info-hero h1 {
+    font-size: clamp(30px, 11vw, 46px);
+  }
+
+  .project-info-lead {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .project-info-card,
+  .project-info-guide-card {
+    padding: 20px 18px;
+    border-radius: 18px;
+  }
+
+  .project-info-card h2,
+  .project-info-guide-card h3 {
+    font-size: 22px;
+  }
+
+  .project-info-card p,
+  .project-info-guide-card p {
+    font-size: 13px;
+    line-height: 1.65;
   }
 }

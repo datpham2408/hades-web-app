@@ -44,7 +44,8 @@
 .recruitment-page {
   background:
     radial-gradient(circle at top left, rgba(0, 0, 0, 0.06), transparent 28%),
-    linear-gradient(180deg, #f7f5f0 0%, #ffffff 24%, #ffffff 100%);
+    radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.03), transparent 22%),
+    linear-gradient(180deg, #f7f7f4 0%, #ffffff 24%, #ffffff 100%);
 }
 
 .recruitment-hero {
@@ -297,6 +298,11 @@
   gap: 24px;
   margin-top: 36px;
   padding: 28px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(8px);
 }
 
 .recruitment-cta a {
@@ -318,6 +324,80 @@
 
 .recruitment-page .footer {
   margin-top: 10px;
+}
+
+body.dark-theme.recruitment-page {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.04), transparent 22%),
+    linear-gradient(180deg, #060607 0%, #0b0b0d 28%, #0f0f11 100%);
+  color: #f4f4f1;
+}
+
+body.dark-theme.recruitment-page .recruitment-main,
+body.dark-theme.recruitment-page .recruitment-cta,
+body.dark-theme.recruitment-page .recruitment-job-card,
+body.dark-theme.recruitment-page .recruitment-feature-card,
+body.dark-theme.recruitment-page .recruitment-stat,
+body.dark-theme.recruitment-page .recruitment-process-grid article {
+  color: #f4f4f1;
+}
+
+body.dark-theme.recruitment-page .recruitment-section-head h2,
+body.dark-theme.recruitment-page .recruitment-cta h2,
+body.dark-theme.recruitment-page .recruitment-feature-card h3,
+body.dark-theme.recruitment-page .recruitment-job-card h3,
+body.dark-theme.recruitment-page .recruitment-process-grid h3,
+body.dark-theme.recruitment-page .recruitment-stat strong {
+  color: #d2d2cb;
+}
+
+body.dark-theme.recruitment-page .recruitment-feature-card,
+body.dark-theme.recruitment-page .recruitment-snapshot article,
+body.dark-theme.recruitment-page .recruitment-job-card,
+body.dark-theme.recruitment-page .recruitment-process-grid article,
+body.dark-theme.recruitment-page .recruitment-cta {
+  border-color: rgba(255, 255, 255, 0.06);
+  background: rgba(10, 10, 12, 0.84);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.34);
+}
+
+body.dark-theme.recruitment-page .recruitment-lead,
+body.dark-theme.recruitment-page .recruitment-feature-card p,
+body.dark-theme.recruitment-page .recruitment-job-card p:last-child,
+body.dark-theme.recruitment-page .recruitment-cta p,
+body.dark-theme.recruitment-page .recruitment-stat p,
+body.dark-theme.recruitment-page .recruitment-job-meta,
+body.dark-theme.recruitment-page .recruitment-stat span {
+  color: #8f8f89;
+}
+
+body.dark-theme.recruitment-page .recruitment-job-card a,
+body.dark-theme.recruitment-page .recruitment-cta a,
+body.dark-theme.recruitment-page .recruitment-primary-btn {
+  background: rgba(255, 255, 255, 0.02);
+  color: #f4f4f1;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme.recruitment-page .recruitment-secondary-btn {
+  background: transparent;
+  color: #f4f4f1;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme.recruitment-page .sound-btn {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  color: #f4f4f1;
+}
+
+body.dark-theme.recruitment-page .sound-btn:hover,
+body.dark-theme.recruitment-page .recruitment-primary-btn:hover,
+body.dark-theme.recruitment-page .recruitment-secondary-btn:hover,
+body.dark-theme.recruitment-page .recruitment-job-card a:hover,
+body.dark-theme.recruitment-page .recruitment-cta a:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 @media (max-width: 768px) {
@@ -399,5 +479,37 @@
   .recruitment-primary-btn,
   .recruitment-secondary-btn {
     width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .recruitment-hero {
+    min-height: 56vh;
+  }
+
+  .recruitment-hero-content {
+    padding: 84px 14px 24px;
+  }
+
+  .recruitment-hero-content h1 {
+    font-size: clamp(28px, 11vw, 44px);
+  }
+
+  .recruitment-section-head h2 {
+    font-size: clamp(24px, 8vw, 36px);
+  }
+
+  .recruitment-feature-card,
+  .recruitment-stat,
+  .recruitment-job-card,
+  .recruitment-process-grid article,
+  .recruitment-cta {
+    padding: 18px;
+  }
+
+  .recruitment-job-meta,
+  .recruitment-kicker,
+  .recruitment-eyebrow {
+    letter-spacing: 0.1em;
   }
 }
