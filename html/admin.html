@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+  <body class="admin-page">
+    <main class="admin-shell">
+      <aside class="admin-sidebar">
+        <a class="admin-logo" href="../index.html">HADES</a>
+        <nav class="admin-menu" aria-label="Admin menu">
+          <button class="active" type="button" data-admin-tab="dashboard">
+            <i class="bx bx-grid-alt"></i> Dashboard
+          </button>
+          <button type="button" data-admin-tab="products">
+            <i class="bx bx-package"></i> Products
+          </button>
+          <button type="button" data-admin-tab="orders">
+            <i class="bx bx-receipt"></i> Orders
+          </button>
+          <button type="button" data-admin-tab="users">
+            <i class="bx bx-user"></i> Users
+          </button>
+          <a href="../index.html"><i class="bx bx-store"></i> Store</a>
+          <button type="button" id="adminLogout">
+            <i class="bx bx-log-out"></i> Logout
+          </button>
+        </nav>
+      </aside>
+
+      <section class="admin-main">
+        <header class="admin-topbar">
+          <div>
+            <span class="admin-eyebrow">ADMIN CONTROL</span>
+            <h1 id="adminPageTitle">Dashboard</h1>
+          </div>
+          <div class="admin-user" id="adminUser"></div>
+        </header>
+
+        <section class="admin-tab active" id="adminTabDashboard">
+          <div class="admin-stats-grid">
+            <article class="admin-stat-card">
+              <span>Products</span>
+              <strong id="statProducts">0</strong>
+            </article>
+            <article class="admin-stat-card">
+              <span>Users</span>
+              <strong id="statUsers">0</strong>
+            </article>
+            <article class="admin-stat-card">
+              <span>Orders</span>
+              <strong id="statOrders">0</strong>
+            </article>
+            <article class="admin-stat-card">
+              <span>Revenue</span>
+              <strong id="statRevenue">0 VND</strong>
+            </article>
+          </div>
+
+          <div class="admin-grid-two">
+            <section class="admin-card">
+              <div class="admin-section-head">
+                <h2>Recent orders</h2>
+              </div>
+              <div id="recentOrders" class="admin-list-empty"></div>
+            </section>
+
+            <section class="admin-card">
+              <div class="admin-section-head">
+                <h2>Low stock</h2>
+              </div>
+              <div id="lowStockProducts" class="admin-list-empty"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-tab" id="adminTabProducts">
+          <section class="admin-card admin-form-card" aria-labelledby="productFormTitle">
+            <div class="admin-section-head">
+              <h2 id="productFormTitle">Add product</h2>
+              <button type="button" class="admin-secondary-btn" id="resetProductForm">
+                Reset
+              </button>
+            </div>
+
+            <form id="productForm" class="admin-product-form" novalidate>
+              <input type="hidden" id="productId" />
+
+              <label>
+                Product name *
+                <input id="productName" type="text" placeholder="HADES RACING TEAM" />
+                <span class="admin-error" id="productNameError"></span>
+              </label>
+
+              <label>
+                Price *
+                <input id="productPrice" type="number" min="0" step="1000" placeholder="550000" />
+                <span class="admin-error" id="productPriceError"></span>
+              </label>
+
+              <label>
+                Image path *
+                <input id="productImage" type="text" placeholder="../img/f25.jpg or image URL" />
+                <span class="admin-error" id="productImageError"></span>
+              </label>
+
+              <label>
+                Upload image
+                <input id="productImageUpload" type="file" accept="image/*" />
+                <span class="admin-hint" id="productImageHint">JPG, PNG, WebP. Max 1 MB.</span>
+              </label>
+
+              <div class="admin-image-preview" id="productImagePreview">
+                <span>No image selected</span>
+              </div>
+
+              <label>
+                Category
+                <select id="productCategory">
+                  <option value="tops">Tops</option>
+                  <option value="bottoms">Bottoms</option>
+                  <option value="outerwear">Outerwear</option>
+                  <option value="underwear">Underwear</option>
+                  <option value="bags">Bags</option>
+                  <option value="accessories">Accessories</option>
+                </select>
+              </label>
+
+              <label>
+                Sizes
+                <input id="productSizes" type="text" placeholder="S, M, L, XL" />
+              </label>
+
+              <label>
+                Stock
+                <input id="productStock" type="number" min="0" step="1" placeholder="20" />
+              </label>
+
+              <label class="admin-form-wide">
+                Description
+                <textarea id="productDescription" rows="4" placeholder="Fabric, fit, styling notes..."></textarea>
+              </label>
+
+              <div class="admin-form-actions">
+                <button type="submit" class="admin-primary-btn">Save product</button>
+                <p class="admin-success" id="productFormSuccess"></p>
+              </div>
+            </form>
+          </section>
+
+          <section class="admin-card">
+            <div class="admin-section-head">
+              <h2>Product list</h2>
+              <div class="admin-toolbar">
+                <input id="productSearch" type="search" placeholder="Search products" />
+                <span id="productCount"></span>
+              </div>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductList"></tbody>
+              </table>
+            </div>
+            <div class="admin-pagination" id="productPagination"></div>
+          </section>
+        </section>
+
+        <section class="admin-tab" id="adminTabOrders">
+          <section class="admin-card">
+            <div class="admin-section-head">
+              <h2>Orders</h2>
+              <div class="admin-toolbar">
+                <input id="orderSearch" type="search" placeholder="Code, phone, email" />
+                <input id="orderDateFilter" type="date" />
+                <select id="orderStatusFilter">
+                  <option value="all">All status</option>
+                  <option value="pending">Pending</option>
+                  <option value="processing">Processing</option>
+                  <option value="shipped">Shipped</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminOrderList"></tbody>
+              </table>
+            </div>
+            <div id="orderDetailPanel" class="admin-detail-panel"></div>
+          </section>
+        </section>
+
+        <section class="admin-tab" id="adminTabUsers">
+          <section class="admin-card">
+            <div class="admin-section-head">
+              <h2>Users</h2>
+              <div class="admin-toolbar">
+                <input id="userSearch" type="search" placeholder="Search users" />
+                <span id="userCount"></span>
+              </div>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminUserList"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <div class="admin-modal-backdrop" id="adminConfirmModal" hidden>
+      <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="adminConfirmTitle">
+        <h2 id="adminConfirmTitle">Confirm action</h2>
+        <p id="adminConfirmMessage">This action cannot be undone.</p>
+        <div class="admin-modal-actions">
+          <button type="button" class="admin-secondary-btn" id="adminConfirmCancel">Cancel</button>
+          <button type="button" class="admin-danger-btn" id="adminConfirmAccept">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/product.js"></script>
+    <script src="../js/app-core.js"></script>
+    <script src="../js/app-auth.js"></script>
+    <script src="../js/admin.js"></script>
+  </body>
+</html>

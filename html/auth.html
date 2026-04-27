@@ -63,7 +63,7 @@
       <section class="auth-visual">
         <div class="auth-image-stack" aria-label="Lookbook">
           <figure class="auth-image-card auth-image-card-large">
-            <img src="../img/auth-lookbook-1.jpg" alt="Streetwear lookbook 1" />
+            <img src="../img/auth-lookbook-1.jpg" alt="Streetwear lookbook 1" loading="lazy" />
             <figcaption>
               <span>01</span>
               <strong>LOOKBOOK A</strong>
@@ -71,7 +71,7 @@
           </figure>
 
           <figure class="auth-image-card auth-image-card-small">
-            <img src="../img/auth-lookbook-2.jpg" alt="Streetwear lookbook 2" />
+            <img src="../img/auth-lookbook-2.jpg" alt="Streetwear lookbook 2" loading="lazy" />
             <figcaption>
               <span>02</span>
               <strong>LOOKBOOK B</strong>
@@ -188,14 +188,28 @@
             <p onclick="showLogin()">Bạn đã có tài khoản? Đăng nhập tại đây</p>
           </form>
 
-          <div id="login-form" class="auth-form">
+          <form id="login-form" class="auth-form" novalidate>
             <h2>Đăng nhập</h2>
 
-            <label>Số điện thoại *</label>
-            <input type="text" placeholder="Số điện thoại" />
+            <label for="login-identifier">Email hoặc username *</label>
+            <input
+              id="login-identifier"
+              name="identifier"
+              type="text"
+              placeholder="Email hoặc username"
+              autocomplete="username"
+            />
+            <p class="auth-error" id="login-identifier-error"></p>
 
-            <label>Mật khẩu *</label>
-            <input type="password" placeholder="Mật khẩu" />
+            <label for="login-password">Mật khẩu *</label>
+            <input
+              id="login-password"
+              name="password"
+              type="password"
+              placeholder="Mật khẩu"
+              autocomplete="current-password"
+            />
+            <p class="auth-error" id="login-password-error"></p>
 
             <div class="auth-login-meta">
               <label class="auth-remember">
@@ -207,10 +221,11 @@
               </p>
             </div>
 
-            <button type="button">Đăng nhập</button>
+            <button type="submit">Đăng nhập</button>
+            <p class="auth-error" id="login-error"></p>
 
             <p onclick="showRegister()">Bạn chưa có tài khoản? Đăng ký ngay</p>
-          </div>
+          </form>
         </div>
       </section>
     </main>

@@ -1,5 +1,5 @@
 function getProductPriceMarkup(product) {
-  if (product.stock === 0) {
+  if (isProductSoldOut(product)) {
     return t("soldOut");
   }
 
@@ -18,38 +18,57 @@ function getProductPriceMarkup(product) {
   `;
 }
 
+function escapeHtml(value = "") {
+  return String(value).replace(/[&<>"']/g, (char) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return entities[char];
+  });
+}
+
 function getCartVariantText(item) {
   return [item.category, item.selectedSize].filter(Boolean).join(" / ") || "standard";
 }
 
 function getProductCardMarkup(product) {
   const detailUrl = getPageUrl(`product-detail.html?id=${product.id}`);
+  const soldOut = isProductSoldOut(product);
+  const actionDisabled = soldOut ? "disabled aria-disabled=\"true\"" : "";
+  const productName = escapeHtml(product.name);
 
   return `
     <div class="product-card">
-      <a class="product-link" href="${detailUrl}">
-        <div class="product-image">
-          <img src="${getImageUrl(product.imgFront)}" class="img-front" />
-          <img src="${getImageUrl(product.imgBack)}" class="img-back" />
-        </div>
-      </a>
+      <div class="product-media">
+        <a class="product-link" href="${detailUrl}">
+          <div class="product-image">
+            <img src="${getImageUrl(product.imgFront)}" class="img-front" loading="lazy" alt="${productName}" />
+            <img src="${getImageUrl(product.imgBack)}" class="img-back" loading="lazy" alt="${productName}" />
+          </div>
+        </a>
 
-      <div class="product-image-overlay">
-        <div class="product-overlay">
-          <button class="buy-now-btn" data-id="${product.id}">
-            <span class="btn-icon"><i class="bx bx-shopping-bag"></i></span>
-            <span class="btn-text">${t("buyNow")}</span>
-          </button>
-          <button class="add-cart-btn" data-id="${product.id}">
-            <span class="btn-icon"><i class="bx bx-cart"></i></span>
-            <span class="btn-text">${t("addToCart")}</span>
-          </button>
+        <div class="product-image-overlay">
+          <div class="product-overlay">
+            <button class="buy-now-btn" data-id="${product.id}" ${actionDisabled}>
+              <span class="btn-icon"><i class="bx bx-shopping-bag"></i></span>
+              <span class="btn-text">${t("buyNow")}</span>
+            </button>
+            <button class="add-cart-btn" data-id="${product.id}" ${actionDisabled}>
+              <span class="btn-icon"><i class="bx bx-cart"></i></span>
+              <span class="btn-text">${t("addToCart")}</span>
+            </button>
+          </div>
         </div>
       </div>
 
       <div class="product-info">
         <a class="product-name-link" href="${detailUrl}">
-          <p class="product-name">${product.name}</p>
+          <p class="product-name">${productName}</p>
         </a>
         <div class="product-price ${product.oldPrice ? "is-sale" : ""}">
           ${getProductPriceMarkup(product)}
@@ -60,16 +79,18 @@ function getProductCardMarkup(product) {
 }
 
 function getCartItemMarkup(item) {
+  const itemName = escapeHtml(item.name);
+
   return `
     <article class="cart-item">
       <div class="cart-item-media">
-        <img class="cart-item-image" src="${getImageUrl(item.imgFront)}" alt="${item.name}">
+        <img class="cart-item-image" src="${getImageUrl(item.imgFront)}" alt="${itemName}" loading="lazy">
       </div>
 
       <div class="cart-item-content">
         <div class="cart-item-top">
           <div>
-            <h4 class="cart-item-name">${item.name}</h4>
+            <h4 class="cart-item-name">${itemName}</h4>
             <p class="cart-item-meta">${getCartVariantText(item)}</p>
           </div>
 
@@ -117,17 +138,19 @@ function getCartItemMarkup(item) {
 
 function getSearchResultMarkup(product) {
   const detailUrl = getPageUrl(`product-detail.html?id=${product.id}`);
+  const productName = escapeHtml(product.name);
 
   return `
     <a class="search-result-item" href="${detailUrl}">
       <img
         class="search-result-image"
         src="${getImageUrl(product.imgFront)}"
-        alt="${product.name}"
+        alt="${productName}"
+        loading="lazy"
       >
 
       <div class="search-result-content">
-        <h4 class="search-result-name">${product.name}</h4>
+        <h4 class="search-result-name">${productName}</h4>
         <span class="search-result-price">${formatPrice(product.price)}</span>
       </div>
     </a>
@@ -175,18 +198,23 @@ function renderCart() {
 }
 
 function updateCartCount() {
-  const countElement = document.getElementById("cart-count");
-
-  if (!countElement) {
-    return;
-  }
-
   const totalItems = getCartCount();
-  countElement.innerText = totalItems;
 
-  const cartLabel = qs(SELECTORS.cartLabel);
+  document.querySelectorAll("#cart-count, [data-cart-count]").forEach((countElement) => {
+    countElement.innerText = totalItems;
+  });
 
-  if (cartLabel) {
+  qsa(SELECTORS.cartLabel).forEach((cartLabel) => {
+    const textNode = cartLabel.querySelector(".nav-cart-text");
+    const countNode = cartLabel.querySelector("#cart-count, [data-cart-count]");
+
+    if (textNode && countNode) {
+      textNode.textContent = t("cart");
+      cartLabel.setAttribute("aria-label", `${t("cart")} (${totalItems})`);
+      cartLabel.title = `${t("cart")} (${totalItems})`;
+      return;
+    }
+
     cartLabel.innerHTML = `${t("cart")} (<span id="cart-count">${totalItems}</span>)`;
-  }
+  });
 }

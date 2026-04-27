@@ -3,7 +3,7 @@
   position: relative;
   min-height: 70vh;
   height: auto;
-  margin-top: 80px;
+  margin-top: var(--nav-height, 72px);
   margin-bottom: 10px;
   overflow: hidden;
 }
@@ -403,7 +403,7 @@ body.dark-theme.recruitment-page .recruitment-cta a:hover {
 @media (max-width: 768px) {
   .recruitment-hero {
     min-height: 66vh;
-    margin-top: 92px;
+    margin-top: var(--nav-height, 64px);
   }
 
   .recruitment-hero-content {
@@ -448,7 +448,7 @@ body.dark-theme.recruitment-page .recruitment-cta a:hover {
 @media (max-width: 425px) {
   .recruitment-hero {
     min-height: 60vh;
-    margin-top: 86px;
+    margin-top: var(--nav-height, 60px);
   }
 
   .recruitment-hero-content h1 {
@@ -511,5 +511,59 @@ body.dark-theme.recruitment-page .recruitment-cta a:hover {
   .recruitment-kicker,
   .recruitment-eyebrow {
     letter-spacing: 0.1em;
+  }
+}
+
+@media (max-width: 768px) {
+  .recruitment-page {
+    background:
+      linear-gradient(135deg, rgba(0, 0, 0, 0.04) 0 1px, transparent 1px 12px),
+      #f4f4f0;
+  }
+
+  .recruitment-hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.82) 100%),
+      linear-gradient(90deg, rgba(228, 41, 41, 0.2), transparent 58%);
+  }
+
+  .recruitment-hero-content h1,
+  .recruitment-section-head h2,
+  .recruitment-cta h2 {
+    max-width: 100%;
+    text-transform: uppercase;
+  }
+
+  .recruitment-eyebrow,
+  .recruitment-kicker,
+  .recruitment-job-meta {
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .recruitment-feature-card,
+  .recruitment-stat,
+  .recruitment-job-card,
+  .recruitment-process-grid article,
+  .recruitment-cta {
+    border-radius: 0;
+    background: #fff;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .recruitment-primary-btn,
+  .recruitment-secondary-btn,
+  .recruitment-job-card a,
+  .recruitment-cta a {
+    min-height: 54px;
+    border-radius: 0;
+    font-weight: 800;
+  }
+
+  .recruitment-primary-btn,
+  .recruitment-job-card a,
+  .recruitment-cta a {
+    background: #111;
+    color: #fff;
   }
 }

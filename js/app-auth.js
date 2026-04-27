@@ -20,8 +20,8 @@
     registerSubmit: "Đăng ký",
     registerSwitch: "Bạn đã có tài khoản? Đăng nhập tại đây",
     loginTitle: "Đăng nhập",
-    loginPhoneLabel: "Số điện thoại *",
-    loginPhonePlaceholder: "Số điện thoại",
+    loginPhoneLabel: "Email hoặc username *",
+    loginPhonePlaceholder: "Email hoặc username",
     loginPasswordLabel: "Mật khẩu *",
     loginPasswordPlaceholder: "Mật khẩu",
     loginForgot: "Quên thông tin tài khoản",
@@ -41,7 +41,10 @@
     gender: "Vui lòng chọn giới tính.",
     passwordMin: "Mật khẩu phải có ít nhất 8 ký tự.",
     passwordRule: "Mật khẩu cần có cả chữ và số.",
+    loginRequired: "Vui lòng nhập tài khoản và mật khẩu.",
+    loginInvalid: "Tài khoản hoặc mật khẩu không đúng.",
     success: "Đăng ký hợp lệ. Bạn có thể đăng nhập.",
+    loginSuccess: "Đăng nhập thành công.",
   },
   en: {
     title: "Account",
@@ -64,8 +67,8 @@
     registerSubmit: "Sign Up",
     registerSwitch: "Already have an account? Sign in here",
     loginTitle: "Sign In",
-    loginPhoneLabel: "Phone number *",
-    loginPhonePlaceholder: "Phone number",
+    loginPhoneLabel: "Email or username *",
+    loginPhonePlaceholder: "Email or username",
     loginPasswordLabel: "Password *",
     loginPasswordPlaceholder: "Password",
     loginForgot: "Forgot account details",
@@ -85,9 +88,68 @@
     gender: "Please choose a gender.",
     passwordMin: "Password must be at least 8 characters.",
     passwordRule: "Password must include letters and numbers.",
+    loginRequired: "Please enter your account and password.",
+    loginInvalid: "Account or password is incorrect.",
     success: "Registration is valid. You can sign in now.",
+    loginSuccess: "Signed in successfully.",
   },
 };
+
+const SEEDED_AUTH_USERS = [
+  {
+    id: "seed-admin",
+    username: "admin",
+    email: "admin@hades.local",
+    displayName: "HADES Admin",
+    role: "admin",
+    passwordHash: "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
+  },
+  {
+    id: "seed-user",
+    username: "user",
+    email: "user@hades.local",
+    displayName: "HADES Member",
+    role: "user",
+    passwordHash: "bd5cf8347e036cabe6cd37323186a02ef6c3589d19daaee31eeb2ae3b1507ebe",
+  },
+];
+
+async function hashPassword(password) {
+  const data = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function getAuthUsers() {
+  const savedUsers = readStorage(STORAGE_KEYS.authUsers, []);
+  const isManaged = localStorage.getItem(STORAGE_KEYS.authUsersManaged) === "true";
+
+  if (isManaged) {
+    return savedUsers;
+  }
+
+  const savedIds = new Set(savedUsers.map((user) => user.id));
+  return [
+    ...SEEDED_AUTH_USERS.filter((user) => !savedIds.has(user.id)),
+    ...savedUsers,
+  ];
+}
+
+function saveAuthUsers(users) {
+  localStorage.setItem(STORAGE_KEYS.authUsersManaged, "true");
+  writeStorage(STORAGE_KEYS.authUsers, users);
+}
+
+function findAuthUser(identifier) {
+  const normalizedIdentifier = identifier.trim().toLowerCase();
+  return getAuthUsers().find(
+    (user) =>
+      user.email.toLowerCase() === normalizedIdentifier ||
+      user.username.toLowerCase() === normalizedIdentifier,
+  );
+}
 function getAuthLanguage() {
   return localStorage.getItem(STORAGE_KEYS.language) === "en" ? "en" : "vi";
 }
@@ -183,7 +245,7 @@ function updateAuthText() {
     const pNodes = loginForm.querySelectorAll("p");
     const heading = loginForm.querySelector("h2");
     const forgotText = loginForm.querySelector(".forgot");
-    const submitButton = loginForm.querySelector('button[type="button"]');
+    const submitButton = loginForm.querySelector('button[type="submit"]');
     const switchText = pNodes[pNodes.length - 1];
 
     if (heading) heading.textContent = ai("loginTitle");
@@ -353,7 +415,49 @@ function validateRegisterField(fieldName) {
   return message === "";
 }
 
-function validateRegisterForm() {
+function setLoginError(message = "") {
+  const loginError = document.getElementById("login-error");
+  const identifier = document.getElementById("login-identifier");
+  const password = document.getElementById("login-password");
+
+  [identifier, password].forEach((field) => {
+    if (field) {
+      field.classList.toggle("is-invalid", Boolean(message));
+      field.setAttribute("aria-invalid", String(Boolean(message)));
+    }
+  });
+
+  if (loginError) {
+    loginError.textContent = message;
+  }
+}
+
+async function loginWithCredentials(identifier, password) {
+  if (!identifier.trim() || !password.trim()) {
+    setLoginError(ai("loginRequired"));
+    return false;
+  }
+
+  const user = findAuthUser(identifier);
+  const passwordHash = await hashPassword(password);
+
+  if (!user || user.passwordHash !== passwordHash) {
+    setLoginError(ai("loginInvalid"));
+    return false;
+  }
+
+  writeStorage(STORAGE_KEYS.authSession, {
+    id: user.id,
+    displayName: user.displayName,
+    role: user.role,
+    signedInAt: new Date().toISOString(),
+  });
+
+  setLoginError("");
+  return true;
+}
+
+async function validateRegisterForm() {
   const fields = getRegisterFieldElements();
 
   if (Object.values(fields).some((field) => !field)) {
@@ -382,10 +486,32 @@ function validateRegisterForm() {
   const gender = fields.gender.value;
   const password = fields.password.value;
   const success = document.getElementById("register-success");
+  const username = email.split("@")[0].toLowerCase();
+  const existingUser = findAuthUser(email) || findAuthUser(username);
+
+  if (existingUser) {
+    setFieldError("email", "Email đã được sử dụng.");
+    return false;
+  }
 
   if (success) {
     success.textContent = ai("success");
   }
+
+  const passwordHash = await hashPassword(password);
+  const users = getAuthUsers();
+  users.push({
+    id: `user-${Date.now()}`,
+    username,
+    email,
+    displayName: name,
+    phone,
+    birthdate,
+    gender,
+    role: "user",
+    passwordHash,
+  });
+  saveAuthUsers(users);
 
   writeStorage(STORAGE_KEYS.registeredUser, {
     fullName: name,
@@ -400,8 +526,9 @@ function validateRegisterForm() {
 
 function initAuthForm() {
   const registerForm = document.getElementById("register-form");
+  const loginForm = document.getElementById("login-form");
 
-  if (!registerForm) {
+  if (!registerForm && !loginForm) {
     return;
   }
 
@@ -409,12 +536,28 @@ function initAuthForm() {
   setAuthMode(savedMode === "register" ? "register" : "login");
   updateAuthText();
 
-  registerForm.addEventListener("submit", (event) => {
+  registerForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    if (validateRegisterForm()) {
+    if (await validateRegisterForm()) {
       window.setTimeout(showLogin, 900);
     }
+  });
+
+  loginForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const identifier = document.getElementById("login-identifier")?.value || "";
+    const password = document.getElementById("login-password")?.value || "";
+
+    if (await loginWithCredentials(identifier, password)) {
+      const redirect = new URLSearchParams(window.location.search).get("redirect");
+      window.location.href = redirect || (isAdminUser() ? "admin.html" : "../index.html");
+    }
+  });
+
+  ["login-identifier", "login-password"].forEach((id) => {
+    document.getElementById(id)?.addEventListener("input", () => setLoginError(""));
   });
 
   ["name", "phone", "email", "password"].forEach((fieldName) => {

@@ -13,8 +13,10 @@
   top: 0;
   z-index: 20;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   padding: 24px 40px;
   background: rgba(247, 247, 244, 0.9);
   border-bottom: 1px solid #e5e5df;
@@ -481,6 +483,24 @@ body.dark-theme.checkout-page .place-order-button:hover {
 @media (max-width: 480px) {
   .checkout-header {
     padding: 14px 14px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .checkout-logo {
+    flex: 1 0 100%;
+  }
+
+  .checkout-theme-toggle,
+  .checkout-back {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .checkout-back {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .checkout-layout {
@@ -525,5 +545,82 @@ body.dark-theme.checkout-page .place-order-button:hover {
   .place-order-button,
   .discount-button {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .checkout-page {
+    background:
+      linear-gradient(135deg, rgba(0, 0, 0, 0.04) 0 1px, transparent 1px 12px),
+      #f4f4f0;
+  }
+
+  .checkout-header {
+    background: #111;
+    color: #fff;
+    border-bottom: 0;
+  }
+
+  .checkout-logo,
+  .checkout-back {
+    color: #fff;
+  }
+
+  .checkout-theme-toggle {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+
+  .checkout-layout {
+    gap: 16px;
+  }
+
+  .checkout-section {
+    border-radius: 0;
+    background: #fff;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .checkout-page-title {
+    font-size: 30px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .checkout-section-title {
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  .checkout-field input,
+  .checkout-field select,
+  .discount-input {
+    min-height: 52px;
+    border-radius: 0;
+    font-size: 15px;
+  }
+
+  .payment-option,
+  .payment-details-card,
+  .shipping-placeholder {
+    border-radius: 0;
+  }
+
+  .place-order-button,
+  .discount-button {
+    min-height: 54px;
+    border-radius: 0;
+    background: #111;
+    color: #fff;
+    font-family: var(--font-navbar);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .summary-row-total {
+    font-size: 22px;
   }
 }

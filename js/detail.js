@@ -1,4 +1,4 @@
-const DETAIL_TEXT = {
+ const DETAIL_TEXT = {
   vi: {
     pageTitle: "Chi tiết sản phẩm",
     home: "Trang chủ",
@@ -235,7 +235,7 @@ function renderDetailThumbnails(product, images, elements) {
           type="button"
           data-image="${image}"
         >
-          <img src="${image}" alt="${product.name}">
+          <img src="${image}" alt="${product.name}" loading="lazy">
         </button>
       `,
     )
@@ -331,10 +331,11 @@ function renderDetailProduct() {
   }
 
   const images = getDetailImages(currentDetailProduct);
+  const soldOut = isProductSoldOut(currentDetailProduct);
 
   elements.name.textContent = currentDetailProduct.name;
   elements.sku.textContent = `SKU: HDS-${currentDetailProduct.id}`;
-  elements.price.textContent = formatPrice(currentDetailProduct.price);
+  elements.price.textContent = soldOut ? t("soldOut") : formatPrice(currentDetailProduct.price);
   elements.colorName.textContent = currentDetailProduct.name.includes("BLACK")
     ? dt("black")
     : dt("signature");
@@ -349,6 +350,10 @@ function renderDetailProduct() {
 
   renderDetailInfo(currentDetailProduct.category, elements.info);
   renderDetailThumbnails(currentDetailProduct, images, elements);
+
+  document.getElementById("detailAddToCart").disabled = soldOut;
+  document.getElementById("detailBuyNow").disabled = soldOut;
+
   updateDetailText();
 }
 
@@ -369,7 +374,7 @@ function showDetailFeedback(message) {
 }
 
 function saveDetailItemToCart(redirectToCheckout = false) {
-  if (!currentDetailProduct) {
+  if (!currentDetailProduct || isProductSoldOut(currentDetailProduct)) {
     return;
   }
 

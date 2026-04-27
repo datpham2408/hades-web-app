@@ -3,6 +3,11 @@ const STORAGE_KEYS = {
   language: "language",
   authMode: "authMode",
   registeredUser: "registeredUser",
+  authUsers: "authUsers",
+  authUsersManaged: "authUsersManaged",
+  authSession: "authSession",
+  adminProducts: "adminProducts",
+  orders: "orders",
   theme: "theme",
 };
 
@@ -17,8 +22,8 @@ const SELECTORS = {
   searchTitle: ".search-title",
   navLogin: ".nav-login",
   navSearch: ".nav-search",
-    navProjectInfo:
-      '.nav-menu a[href$="project-info.html"], .mobile-menu a[href$="project-info.html"]',
+  navProjectInfo:
+    '.nav-menu a[href$="project-info.html"], .mobile-menu a[href$="project-info.html"], [data-nav-key="project-info"]',
   navLanguage: ".nav-lang, .cart-lang",
   mobileMenu: ".mobile-menu",
   overlay: ".overlay",
@@ -44,6 +49,14 @@ const AUTH_MESSAGES = {
 const translations = {
   vi: {
     login: "\u0110\u0102NG NH\u1eacP",
+    logout: "\u0110\u0102NG XU\u1ea4T",
+    admin: "ADMIN",
+    adminDashboard: "ADMIN DASHBOARD",
+    shop: "SHOP",
+    info: "INFO",
+    account: "T\u00c0I KHO\u1ea2N",
+    language: "NG\u00d4N NG\u1eee",
+    menu: "MENU",
     search: "T\u00ccM KI\u1ebeM",
     searchTitle: "T\u00ccM KI\u1ebeM",
     searchPlaceholder: "T\u00ecm theo t\u00ean s\u1ea3n ph\u1ea9m",
@@ -73,6 +86,14 @@ const translations = {
   },
   en: {
     login: "LOGIN",
+    logout: "LOGOUT",
+    admin: "ADMIN",
+    adminDashboard: "ADMIN DASHBOARD",
+    shop: "SHOP",
+    info: "INFO",
+    account: "ACCOUNT",
+    language: "LANGUAGE",
+    menu: "MENU",
     search: "SEARCH",
     searchTitle: "SEARCH",
     searchPlaceholder: "Search by product name",
@@ -101,7 +122,20 @@ const translations = {
   },
 };
 
-const productData = typeof products !== "undefined" ? products : [];
+function readRawStorage(key, fallback) {
+  try {
+    return JSON.parse(localStorage.getItem(key)) ?? fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function getStoredCatalogProducts() {
+  const fallbackProducts = typeof products !== "undefined" ? products : [];
+  return readRawStorage(STORAGE_KEYS.adminProducts, fallbackProducts);
+}
+
+const productData = getStoredCatalogProducts();
 let perPage = 8;
 
 let currentList = productData;
@@ -154,6 +188,41 @@ function writeStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+function getAuthSession() {
+  return readStorage(STORAGE_KEYS.authSession, null);
+}
+
+function getCurrentUser() {
+  const session = getAuthSession();
+
+  if (!session) {
+    return null;
+  }
+
+  return {
+    id: session.id,
+    displayName: session.displayName,
+    role: session.role,
+  };
+}
+
+function isLoggedIn() {
+  return Boolean(getCurrentUser());
+}
+
+function isAdminUser() {
+  return getCurrentUser()?.role === "admin";
+}
+
+function getAuthPageUrl() {
+  return getPageUrl("auth.html");
+}
+
+function logoutUser() {
+  localStorage.removeItem(STORAGE_KEYS.authSession);
+  window.location.href = getAuthPageUrl();
+}
+
 function setBodyState(className, isActive) {
   document.body.classList.toggle(className, isActive);
 }
@@ -168,6 +237,10 @@ function getPageUrl(page) {
 
 function getImageUrl(path) {
   if (!path) {
+    return path;
+  }
+
+  if (/^(https?:|data:)/i.test(path)) {
     return path;
   }
 
@@ -186,6 +259,10 @@ function buildCartItem(product, overrides = {}) {
     ...overrides,
     quantity: overrides.quantity || 1,
   };
+}
+
+function isProductSoldOut(product) {
+  return Number(product?.stock ?? 1) <= 0;
 }
 
 function getCartStorage() {

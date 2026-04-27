@@ -290,6 +290,47 @@ function saveCheckoutCart(cart) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+function getCheckoutOrders() {
+  return readStorage(STORAGE_KEYS.orders, []);
+}
+
+function saveCheckoutOrders(orders) {
+  writeStorage(STORAGE_KEYS.orders, orders);
+}
+
+function createCheckoutOrder(cart, paymentMethod) {
+  const subtotal = cart.reduce((sum, item) => sum + Number(item.price || 0) * Number(item.quantity || 1), 0);
+  const shipping = subtotal > 0 ? 30000 : 0;
+  const now = new Date();
+  const currentUser = typeof getCurrentUser === "function" ? getCurrentUser() : null;
+
+  return {
+    id: `order-${Date.now()}`,
+    code: `HD-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}-${String(Date.now()).slice(-5)}`,
+    userId: currentUser?.id || null,
+    customer: {
+      fullName: getCheckoutField("fullName")?.value.trim() || "",
+      email: getCheckoutField("email")?.value.trim() || "",
+      phone: getCheckoutField("phone")?.value.trim() || "",
+      address: [
+        getCheckoutField("address")?.value.trim(),
+        getCheckoutField("ward")?.value,
+        getCheckoutField("district")?.value,
+        getCheckoutField("city")?.value,
+      ]
+        .filter(Boolean)
+        .join(", "),
+    },
+    items: cart,
+    subtotal,
+    shipping,
+    total: subtotal + shipping,
+    paymentMethod,
+    status: "pending",
+    createdAt: now.toISOString(),
+  };
+}
+
 function getCheckoutElements() {
   return {
     title: document.querySelector("title"),
@@ -578,9 +619,11 @@ function handlePlaceOrder() {
   }
 
   const paymentMethod = getSelectedPaymentMethod();
+  const order = createCheckoutOrder(cart, paymentMethod);
   const paymentLabel =
     paymentMethod === "bank" ? c("orderSuccessBank") : c("orderSuccessCod");
 
+  saveCheckoutOrders([order, ...getCheckoutOrders()]);
   saveCheckoutCart([]);
   renderCheckoutSummary();
   updatePaymentDetails();

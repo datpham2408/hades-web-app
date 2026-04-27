@@ -160,12 +160,50 @@ function updateStaticText() {
   const sortSelect = document.getElementById("sort");
 
   if (login) {
-    login.textContent = t("login");
+    const user = getCurrentUser();
+
+    if (user) {
+      login.classList.add("is-authenticated");
+      login.href = "#";
+      login.dataset.authAction = "account";
+      login.title = user.displayName;
+    } else {
+      login.classList.remove("is-authenticated");
+      login.href = getPageUrl("auth.html");
+      login.dataset.authAction = "login";
+      login.title = t("login");
+    }
   }
 
+  document.querySelectorAll(".admin-nav-link").forEach((link) => link.remove());
+
   if (search) {
-    search.textContent = t("search");
+    const searchText = search.querySelector(".nav-search-text");
+
+    if (searchText) {
+      searchText.textContent = t("search");
+      search.setAttribute("aria-label", t("search"));
+      search.title = t("search");
+    } else {
+      search.textContent = t("search");
+    }
   }
+
+  qsa('[data-nav-label="shop"]').forEach((node) => {
+    node.textContent = t("shop");
+  });
+
+  qsa('[data-nav-label="info"]').forEach((node) => {
+    node.textContent = t("info");
+  });
+
+  qsa(".mobile-search-label").forEach((node) => {
+    node.textContent = t("search");
+  });
+
+  qsa(".mobile-tools-label").forEach((node) => {
+    node.textContent = t("language");
+  });
 
   projectInfo.forEach((node) => {
     node.textContent = t("projectInfo");
@@ -213,6 +251,14 @@ function updateStaticText() {
 
   if (typeof updateThemeToggleButtons === "function") {
     updateThemeToggleButtons();
+  }
+
+  if (typeof syncDesktopAccountUI === "function") {
+    syncDesktopAccountUI();
+  }
+
+  if (typeof syncMobileAccountUI === "function") {
+    syncMobileAccountUI();
   }
 }
 

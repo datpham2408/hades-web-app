@@ -49,6 +49,9 @@ function openSearch(event) {
   }
 
   closeCart();
+  if (typeof closeMenu === "function") {
+    closeMenu();
+  }
   setBodyState("search-open", true);
   renderSearchResults(getSearchQuery());
 

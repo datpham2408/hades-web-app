@@ -103,9 +103,10 @@
     <section class="recruitment-video recruitment-hero">
       <iframe
         id="video"
-        src="https://www.youtube.com/embed/CsCgX0Cm44g?autoplay=1&mute=1&loop=1&playlist=CsCgX0Cm44g&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1&enablejsapi=1"
+        src="https://www.youtube.com/embed/CsCgX0Cm44g?autoplay=0&mute=1&loop=1&playlist=CsCgX0Cm44g&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1&enablejsapi=1"
         title="Recruitment video"
         frameborder="0"
+        loading="lazy"
         allow="autoplay; encrypted-media; picture-in-picture"
         allowfullscreen
       ></iframe>
@@ -438,8 +439,16 @@
         }
 
         iframe.addEventListener("load", () => {
+          const shouldAvoidAutoplay =
+            window.matchMedia("(max-width: 768px)").matches ||
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
           sendYouTubeCommand("mute");
-          sendYouTubeCommand("playVideo");
+
+          if (!shouldAvoidAutoplay) {
+            sendYouTubeCommand("playVideo");
+          }
+
           updateSoundButton(true);
         });
       }

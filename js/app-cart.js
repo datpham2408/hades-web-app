@@ -10,7 +10,7 @@ function updateCartUI({ keepOpen = false } = {}) {
 function addToCart(id) {
   const product = productData.find((item) => item.id === id);
 
-  if (!product) {
+  if (!product || isProductSoldOut(product)) {
     return;
   }
 
@@ -31,7 +31,7 @@ function addToCart(id) {
 function buyNow(id) {
   const product = productData.find((item) => item.id === id);
 
-  if (!product) {
+  if (!product || isProductSoldOut(product)) {
     return;
   }
 
@@ -57,6 +57,9 @@ function changeCartItemQuantity(id, delta) {
   });
 
   closeSearch();
+  if (typeof closeMenu === "function") {
+    closeMenu();
+  }
   updateCartUI({ keepOpen: true });
 }
 
@@ -66,6 +69,9 @@ function openCart(event) {
   }
 
   closeSearch();
+  if (typeof closeMenu === "function") {
+    closeMenu();
+  }
   updateCartUI({ keepOpen: true });
 }
 
