@@ -826,9 +826,9 @@ body.dark-theme .product-overlay button {
 
 body.dark-theme .buy-now-btn,
 body.dark-theme .add-cart-btn {
-  background: rgba(255, 255, 255, 0.08);
-  color: #f4f4f1;
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.86);
+  color: #111;
+  border-color: rgba(255, 255, 255, 0.42);
 }
 
 .buy-now-btn:hover {
@@ -838,8 +838,9 @@ body.dark-theme .add-cart-btn {
 
 body.dark-theme .buy-now-btn:hover,
 body.dark-theme .add-cart-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: #111;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .add-cart-btn {
@@ -877,8 +878,8 @@ body.dark-theme .add-cart-btn:hover {
 
 body.dark-theme .buy-now-btn .btn-icon,
 body.dark-theme .add-cart-btn .btn-icon {
-  background: #fff;
-  color: #111;
+  background: #111;
+  color: #fff;
 }
 
 .buy-now-btn .btn-icon {
@@ -933,7 +934,18 @@ body.dark-theme .add-cart-btn .btn-icon {
 
 body.dark-theme .buy-now-btn .btn-text,
 body.dark-theme .add-cart-btn .btn-text {
-  color: #f4f4f1;
+  color: #111;
+}
+
+body.dark-theme .buy-now-btn:hover .btn-text,
+body.dark-theme .add-cart-btn:hover .btn-text {
+  color: #fff;
+}
+
+body.dark-theme .buy-now-btn:hover .btn-icon,
+body.dark-theme .add-cart-btn:hover .btn-icon {
+  background: #fff;
+  color: #111;
 }
 
 .product-overlay button:focus-visible {

@@ -324,15 +324,21 @@ body.dark-theme.detail-page .detail-size-btn.is-active {
 }
 
 body.dark-theme.detail-page .detail-add-btn {
-  background: #111113;
-  color: #f4f4f1;
-  border-color: rgba(255, 255, 255, 0.12);
+  background: #fff;
+  color: #111;
+  border-color: #fff;
 }
 
 body.dark-theme.detail-page .detail-buy-btn {
-  background: rgba(255, 255, 255, 0.04);
-  color: #f4f4f1;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #fff;
+  color: #111;
+  border: 1px solid #fff;
+}
+
+body.dark-theme.detail-page .detail-add-btn:hover,
+body.dark-theme.detail-page .detail-buy-btn:hover {
+  background: #f4f4f4;
+  color: #111;
 }
 
 body.dark-theme.detail-page .detail-feedback {

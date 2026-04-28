@@ -407,7 +407,8 @@ function saveDetailItemToCart(redirectToCheckout = false) {
   showDetailFeedback(dt("addedToCart").replace("{size}", selectedDetailSize));
 }
 
-function addDetailProductToCart() {
+function addDetailProductToCart(event) {
+  event?.stopPropagation();
   saveDetailItemToCart(false);
 }
 
