@@ -102,7 +102,8 @@ const SEEDED_AUTH_USERS = [
     email: "admin@hades.local",
     displayName: "HADES Admin",
     role: "admin",
-    passwordHash: "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
+    passwordHash:
+      "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
   },
   {
     id: "seed-user",
@@ -110,7 +111,8 @@ const SEEDED_AUTH_USERS = [
     email: "user@hades.local",
     displayName: "HADES Member",
     role: "user",
-    passwordHash: "bd5cf8347e036cabe6cd37323186a02ef6c3589d19daaee31eeb2ae3b1507ebe",
+    passwordHash:
+      "bd5cf8347e036cabe6cd37323186a02ef6c3589d19daaee31eeb2ae3b1507ebe",
   },
 ];
 
@@ -124,7 +126,8 @@ async function hashPassword(password) {
 
 function getAuthUsers() {
   const savedUsers = readStorage(STORAGE_KEYS.authUsers, []);
-  const isManaged = localStorage.getItem(STORAGE_KEYS.authUsersManaged) === "true";
+  const isManaged =
+    localStorage.getItem(STORAGE_KEYS.authUsersManaged) === "true";
 
   if (isManaged) {
     return savedUsers;
@@ -174,7 +177,8 @@ function setAuthMode(mode) {
   }
 
   modeButtons.forEach((button, index) => {
-    const isActive = (index === 0 && mode === "login") || (index === 1 && mode === "register");
+    const isActive =
+      (index === 0 && mode === "login") || (index === 1 && mode === "register");
     button.classList.toggle("active", isActive);
   });
 }
@@ -193,7 +197,9 @@ function updateAuthText() {
 
   const title = document.querySelector("title");
   const homeLink = document.querySelector('.auth-nav a[href="../index.html"]');
-  const infoLink = document.querySelector('.auth-nav a[href="project-info.html"]');
+  const infoLink = document.querySelector(
+    '.auth-nav a[href="project-info.html"]',
+  );
   const registerForm = document.getElementById("register-form");
   const loginForm = document.getElementById("login-form");
   const forgotModal = document.getElementById("forgotModal");
@@ -361,7 +367,9 @@ function getRegisterFieldErrorMessage(fieldName, value) {
         return ai("email");
       }
 
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)) {
+      if (
+        !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(trimmedValue)
+      ) {
         return ai("email");
       }
 
@@ -467,7 +475,14 @@ async function validateRegisterForm() {
   clearRegisterErrors();
 
   let isValid = true;
-  const fieldNames = ["name", "phone", "email", "birthdate", "gender", "password"];
+  const fieldNames = [
+    "name",
+    "phone",
+    "email",
+    "birthdate",
+    "gender",
+    "password",
+  ];
 
   fieldNames.forEach((fieldName) => {
     if (!validateRegisterField(fieldName)) {
@@ -551,13 +566,18 @@ function initAuthForm() {
     const password = document.getElementById("login-password")?.value || "";
 
     if (await loginWithCredentials(identifier, password)) {
-      const redirect = new URLSearchParams(window.location.search).get("redirect");
-      window.location.href = redirect || (isAdminUser() ? "admin.html" : "../index.html");
+      const redirect = new URLSearchParams(window.location.search).get(
+        "redirect",
+      );
+      window.location.href =
+        redirect || (isAdminUser() ? "admin.html" : "../index.html");
     }
   });
 
   ["login-identifier", "login-password"].forEach((id) => {
-    document.getElementById(id)?.addEventListener("input", () => setLoginError(""));
+    document
+      .getElementById(id)
+      ?.addEventListener("input", () => setLoginError(""));
   });
 
   ["name", "phone", "email", "password"].forEach((fieldName) => {
@@ -626,4 +646,3 @@ function closeForgot() {
     forgotModal.style.display = "none";
   }
 }
-

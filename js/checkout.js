@@ -234,7 +234,7 @@ function getFieldErrorMessage(id, value) {
         return c("emptyFieldEmail");
       }
 
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)) {
+      if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(trimmedValue)) {
         return c("emailInvalid");
       }
 
